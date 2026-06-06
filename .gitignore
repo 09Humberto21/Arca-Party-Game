@@ -5,3 +5,7 @@ dist-ssr
 .vite
 .DS_Store
 npm-debug.log*
+
+# logs temporales del dev server
+vite-dev.log
+*.log
