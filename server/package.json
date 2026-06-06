@@ -1,0 +1,19 @@
+{
+  "name": "arca-party-server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Servidor multijugador (Colyseus) para Arca Party — salas estilo Mario Party.",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js"
+  },
+  "dependencies": {
+    "@colyseus/core": "^0.15.0",
+    "@colyseus/schema": "^2.0.0",
+    "@colyseus/ws-transport": "^0.15.0",
+    "colyseus": "^0.15.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

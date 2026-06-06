@@ -1,0 +1,14 @@
+# Deploy gratis del servidor Arca Party en Render.
+# https://render.com → New → Blueprint → conecta el repo → usa este archivo.
+services:
+  - type: web
+    name: arca-party-server
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install --ignore-scripts
+    startCommand: node src/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20

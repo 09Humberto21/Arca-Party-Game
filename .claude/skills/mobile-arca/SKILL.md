@@ -13,8 +13,15 @@ es **reusar la lógica existente** de los minijuegos (que escuchan teclado y
 eventos de puntero) en vez de reescribirla.
 
 `$ARGUMENTS` indica el alcance: `touch` (solo controles táctiles), `portrait`
-(layout vertical), `fullscreen` (pantalla completa + orientación), o `all`
-(todo). Si está vacío, asume `all`.
+(layout vertical), `fullscreen` (pantalla completa), o `all` (todo). Si está
+vacío, asume `all`.
+
+> **Enfoque actual (decidido por el usuario): el juego se disfruta en VERTICAL
+> en el celular.** No se fuerza horizontal ni se muestra el aviso "gira tu
+> teléfono". El área de juego mantiene 16:9 internamente (para no romper los
+> cálculos `cqh`/`cqw` de los tableros) y se centra; los controles táctiles se
+> dibujan a nivel de viewport, abajo, en unidades `vmin` (grandes y usables en
+> retrato).
 
 ## Antes de empezar (contexto del proyecto)
 
@@ -98,41 +105,41 @@ Detalles de diseño:
 - **Botones de acción** abajo a la DERECHA:
   - `A` = `Space` (bomba en Bomberman / salto en Salta la Ola) — sin repetición.
   - `B` = `x` (detonar, solo Bomberman) — sin repetición.
-- Reusa el estilo del proyecto: clases `.wood-3d` / `.wood-inset`, unidades
-  `cqh`/`cqw`, `text-stroke`, y `playSound('click')` opcional al pulsar.
-- Tamaños grandes para el dedo (botones ~10–12cqh), con `gpu` y
-  `whileTap` de Framer Motion. Respeta `env(safe-area-inset-*)` con padding.
-- Renderiza `<TouchControls />` en `App.jsx` DENTRO del bloque `PLAYING`
-  (junto a `GameLoop`), envuelto en `{isTouch && <TouchControls/>}`. Z alto pero
-  por debajo de overlays de pausa/resultado.
+- Reusa el estilo del proyecto: clases `.wood-3d` / `.wood-inset`,
+  `text-stroke`, y `playSound('click')` opcional al pulsar.
+- Como los controles van a nivel de VIEWPORT (fuera del contenedor 16:9, para
+  ser usables en vertical), usa unidades **`vmin`** (NO `cqh`/`cqw`, que solo
+  valen dentro del Stage). Botones grandes para el dedo (~14–20vmin), con `gpu`
+  y `whileTap`. Posiciónalos con `env(safe-area-inset-*)`.
+- Renderiza `<TouchControls />` en `App.jsx` **fuera** del `<Stage>` (a nivel de
+  viewport), envuelto en `{isTouch && <TouchControls/>}`. El propio componente se
+  autogestiona: devuelve `null` salvo en `screen === PLAYING && !paused`, así no
+  tapa los overlays de pausa/resultado.
 
 > Ventaja: cero cambios en la lógica de los 5 minijuegos. Snake/Bomba/Ola
 > funcionan igual con teclado (escritorio) y con los botones (móvil).
 
-### 3. Stage responsivo (alcance `portrait`/`all`)
-`Stage.jsx` hoy fuerza 16:9 centrado (correcto para que el cálculo en `cqh`/`cqw`
-de los tableros no se rompa). Para móvil:
-- **Opción recomendada (segura):** mantener el área de juego en 16:9 (no rompe
-  los anchos de tablero) pero:
-  - Asegurar que escala a lo ancho del móvil (ya usa `max-w-[177.78vh]` +
-    `max-h-screen`; verifica con `100dvh`/`100dvw` para barras del navegador móvil).
-  - Mostrar un **aviso "gira tu teléfono"** (`RotateHint.jsx`) cuando
-    `matchMedia('(orientation: portrait)')` y el viewport sea estrecho, porque
-    los tableros son apaisados. Es la vía de menor riesgo y mejor jugabilidad.
-- **Opción avanzada (retrato real):** si el usuario insiste en vertical, añade
-  un prop `orientation` al `Stage` y, en retrato, usa una relación ~9:16; PERO
-  entonces hay que revisar cada minijuego cuyo tablero asume ancho apaisado
-  (`SerpienteArca` COLS=15, `BombaArca` COLS=13, anchos en `cqh`): reducir
-  columnas o reescalar para que quepan. Hazlo solo si se pide explícitamente y
-  prueba cada minijuego.
+### 3. Stage responsivo en VERTICAL (alcance `portrait`/`all`)
+`Stage.jsx` mantiene el área de juego en 16:9 internamente (para no romper el
+cálculo `cqh`/`cqw` de los tableros), pero el juego se disfruta tanto en
+horizontal como en **vertical** en el celular:
+- El contenedor 16:9 se escala al máximo que quepa y se **centra** con
+  `maxHeight: '100dvh'` y `maxWidth: '177.78dvh'` (usa `dvh` para no saltar con
+  la barra del navegador móvil).
+- En vertical, el área 16:9 queda centrada (con franjas arriba/abajo) y los
+  controles táctiles se dibujan a nivel de viewport, en la franja inferior.
+- **NO** se usa `RotateHint` ni aviso de "gira tu teléfono" (eliminado). Tampoco
+  se reduce el número de columnas de los tableros: al escalar el 16:9 completo,
+  Snake (COLS=15) y Bomba (COLS=13) caben sin tocar su lógica.
 
-### 4. Pantalla completa + orientación (alcance `fullscreen`/`all`)
-- Botón/acción para `document.documentElement.requestFullscreen()` al pulsar
-  PLAY (gesto del usuario requerido). Envuelve en try/catch (no soportado en iOS Safari).
-- Donde se soporte, `screen.orientation.lock('landscape')` tras fullscreen
-  (try/catch; ignora fallos).
-- `index.html` ya trae `viewport ... user-scalable=no` (evita zoom por doble tap);
-  añade `viewport-fit=cover` para usar `safe-area-inset`.
+### 4. Pantalla completa inmersiva (alcance `fullscreen`/`all`)
+- `src/fullscreen.js` exporta `goFullscreen()`:
+  `document.documentElement.requestFullscreen()` (gesto del usuario requerido,
+  se llama desde el botón PLAY). En try/catch (no soportado en iOS Safari).
+- **Sin** `screen.orientation.lock`: el juego se juega en vertical, no se fuerza
+  la orientación.
+- `index.html` ya trae `viewport ... user-scalable=no` + `viewport-fit=cover`
+  (evita zoom por doble tap y habilita `safe-area-inset`).
 
 ### 5. Pulido táctil
 - En zonas interactivas de arrastre, confirma `touch-action: none` (Sopa y
@@ -146,8 +153,8 @@ de los tableros no se rompa). Para móvil:
 1. `node node_modules/vite/bin/vite.js build` debe pasar sin errores.
 2. Arranca `node node_modules/vite/bin/vite.js --host` y abre la **URL Network**
    en un celular real (misma wifi), o usa el **modo dispositivo** de Chrome DevTools.
-3. Prueba los 5 minijuegos con el dedo: arrastre (Acomoda/Sopa), tocar para
-   saltar + botón A (Ola), D-pad (Snake), D-pad + A(bomba) + B(detonar) (Bomba).
+3. Prueba los 5 minijuegos con el dedo **en vertical**: arrastre (Acomoda/Sopa),
+   tocar para saltar + botón ⬆️ (Ola), D-pad (Snake), D-pad + 💣 + 💥 (Bomba).
 4. Confirma que en **escritorio** todo sigue igual (los controles táctiles no
    aparecen con ratón).
 
@@ -158,5 +165,8 @@ de los tableros no se rompa). Para móvil:
 
 ## No hacer
 - No reescribir la lógica de los minijuegos (usa la síntesis de teclado).
-- No cambiar `cqh`/`cqw` por px ni romper el `containerType: size` del Stage.
+- No cambiar `cqh`/`cqw` por px ni romper el `containerType: size` del Stage
+  (excepción: los `TouchControls`, que viven fuera del Stage y usan `vmin`).
+- No volver a forzar horizontal ni reintroducir el aviso "gira tu teléfono":
+  el juego se diseña para jugarse en VERTICAL.
 - No animar `blur`/`filter`/`box-shadow` en bucle (regla de rendimiento del repo).
