@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useGame } from '../../context/GameContext'
 import { useNet } from '../../context/NetContext'
-import { goFullscreen } from '../../fullscreen'
+import { goFullscreenLandscape } from '../../fullscreen'
 import { useIsTouch } from '../../hooks/useDevice'
 import PartyBackground from '../PartyBackground'
 import WoodButton from '../WoodButton'
@@ -30,7 +30,7 @@ export default function OnlineMenu() {
   const nick = () => (nickname.trim() ? nickname.trim().slice(0, 16) : 'Invitado')
 
   const doCreate = async () => {
-    if (isTouch) goFullscreen()
+    if (isTouch) goFullscreenLandscape()
     playSound('start')
     try {
       await create({ nickname: nick(), skin, rounds: 4 })
@@ -40,7 +40,7 @@ export default function OnlineMenu() {
   }
 
   const doJoin = async () => {
-    if (isTouch) goFullscreen()
+    if (isTouch) goFullscreenLandscape()
     playSound('start')
     try {
       await join(code, { nickname: nick(), skin })
