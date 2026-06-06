@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { GameProvider, SCREENS, useGame } from './context/GameContext'
+import { NetProvider, useNet } from './context/NetContext'
 import Stage from './components/Stage'
 import ErrorBoundary from './components/ErrorBoundary'
 import SoundToggle from './components/SoundToggle'
@@ -16,6 +17,8 @@ import PauseOverlay from './components/PauseOverlay'
 import DefeatScreen from './components/DefeatScreen'
 import VictoryScreen from './components/VictoryScreen'
 import PartyBackground from './components/PartyBackground'
+import OnlineMenu from './components/online/OnlineMenu'
+import OnlineApp from './components/online/OnlineApp'
 
 /**
  * App — Orquestador del flujo de pantallas (game loop) dentro del Stage 16:9.
@@ -72,6 +75,19 @@ function Screens() {
             transition={{ duration: 0.3 }}
           >
             <SelectScreen />
+          </motion.div>
+        )}
+
+        {game.screen === SCREENS.ONLINE && (
+          <motion.div
+            key="online"
+            className="absolute inset-0"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.3 }}
+          >
+            <OnlineMenu />
           </motion.div>
         )}
 
@@ -146,10 +162,18 @@ function Screens() {
   )
 }
 
+/** Cambia entre el flujo offline y el online según haya sesión multijugador. */
+function Root() {
+  const net = useNet()
+  return net.active ? <OnlineApp /> : <Screens />
+}
+
 export default function App() {
   return (
     <GameProvider>
-      <Screens />
+      <NetProvider>
+        <Root />
+      </NetProvider>
     </GameProvider>
   )
 }

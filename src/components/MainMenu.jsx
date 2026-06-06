@@ -84,9 +84,14 @@ export default function MainMenu() {
             <PlayButton onClick={enter} />
           </motion.div>
 
-          <WoodButton size="md" variant="wood" onClick={() => setShowHelp(true)}>
-            📜 ¿CÓMO JUGAR?
-          </WoodButton>
+          <div className="flex items-center gap-[1.5cqw]">
+            <WoodButton size="md" variant="ocean" glow onClick={() => goTo('ONLINE')}>
+              🌐 JUGAR ONLINE
+            </WoodButton>
+            <WoodButton size="md" variant="wood" onClick={() => setShowHelp(true)}>
+              📜 ¿CÓMO JUGAR?
+            </WoodButton>
+          </div>
         </motion.div>
       </div>
 

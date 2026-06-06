@@ -16,6 +16,7 @@ export const SCREENS = {
   MENU: 'MENU',
   PROFILE: 'PROFILE',
   SELECT: 'SELECT',
+  ONLINE: 'ONLINE', // multijugador: crear/unirse a una sala
   SHOP: 'SHOP', // tienda para canjear monedas/diamantes
   PLAYING: 'PLAYING',
   VICTORY: 'VICTORY',
