@@ -35,7 +35,7 @@ export default function OnlineApp() {
 
   return (
     <>
-      <Stage fill={isTouch && !playing}>
+      <Stage>
         <ErrorBoundary>
           <PartyBackground lite={playing}>
             {phase === 'lobby' && <LobbyScreen />}
