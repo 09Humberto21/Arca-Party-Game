@@ -15,10 +15,10 @@ const TITLE = 'HOW TO PLAY'
 function archStyle(i, len) {
   const center = (len - 1) / 2
   const t = (i - center) / center // -1 .. 1
-  const y = t * t * 2.6 // cae en los extremos (cqh)
+  const y = t * t * 2.6 // cae en los extremos (cqmin)
   const rot = t * 16 // gira hacia afuera
   return {
-    transform: `translateY(${y}cqh) rotate(${rot}deg)`,
+    transform: `translateY(${y}cqmin) rotate(${rot}deg)`,
     animation: `letter-bounce 2.2s ease-in-out ${i * 0.06}s infinite`,
     ['--rot']: `${rot}deg`,
   }
@@ -48,34 +48,34 @@ export default function InstructionsModal({ onClose, onPlay }) {
 
       {/* Pergamino */}
       <motion.div
-        className="relative z-10 w-[78cqw] max-w-[120cqh]"
+        className="relative z-10 w-[78cqw] max-w-[120cqmin]"
         initial={{ scale: 0.6, y: 40, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
         exit={{ scale: 0.7, opacity: 0 }}
         transition={{ type: 'spring', stiffness: 240, damping: 18 }}
       >
         {/* Rollo de madera superior */}
-        <WoodRoll className="-mb-[1.5cqh]" />
+        <WoodRoll className="-mb-[1.5cqmin]" />
 
         {/* Hoja de pergamino */}
-        <div className="parchment relative mx-[1.5cqw] rounded-[1cqh] px-[5cqw] py-[4cqh]">
+        <div className="parchment relative mx-[1.5cqw] rounded-[1cqmin] px-[5cqw] py-[4cqmin]">
           {/* Botón cerrar */}
           <motion.button
             onClick={onClose}
             whileHover={{ scale: 1.15, rotate: 90 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Cerrar"
-            className="wood-3d absolute right-[2cqw] top-[2cqh] flex h-[5cqh] w-[5cqh] items-center justify-center rounded-full !border-[0.4cqh] text-[2.6cqh] text-white"
+            className="wood-3d absolute right-[2cqw] top-[2cqmin] flex h-[5cqmin] w-[5cqmin] items-center justify-center rounded-full !border-[0.4cqmin] text-[2.6cqmin] text-white"
           >
             ✕
           </motion.button>
 
           {/* Título arqueado */}
-          <h2 className="mb-[3cqh] flex justify-center font-display leading-none">
+          <h2 className="mb-[3cqmin] flex justify-center font-display leading-none">
             {TITLE.split('').map((ch, i) => (
               <span
                 key={i}
-                className="gold-text gpu inline-block text-[7cqh]"
+                className="gold-text gpu inline-block text-[7cqmin]"
                 style={{ ...archStyle(i, TITLE.length), width: ch === ' ' ? '2cqw' : undefined }}
               >
                 {ch === ' ' ? ' ' : ch}
@@ -95,30 +95,30 @@ export default function InstructionsModal({ onClose, onPlay }) {
               >
                 {/* Disco con icono */}
                 <div
-                  className="relative mb-[1.4cqh] flex h-[14cqh] w-[14cqh] items-center justify-center rounded-full"
+                  className="relative mb-[1.4cqmin] flex h-[14cqmin] w-[14cqmin] items-center justify-center rounded-full"
                   style={{
                     background: `radial-gradient(circle at 50% 35%, #fff, ${s.tint} 70%)`,
-                    boxShadow: `inset 0 -1cqh 1.5cqh rgba(0,0,0,0.25), 0 0.8cqh 0 rgba(120,80,25,0.45), 0 1.4cqh 2cqh rgba(0,0,0,0.3)`,
-                    border: '0.5cqh solid rgba(255,255,255,0.8)',
+                    boxShadow: `inset 0 -1cqmin 1.5cqmin rgba(0,0,0,0.25), 0 0.8cqmin 0 rgba(120,80,25,0.45), 0 1.4cqmin 2cqmin rgba(0,0,0,0.3)`,
+                    border: '0.5cqmin solid rgba(255,255,255,0.8)',
                   }}
                 >
-                  <span className="anim-float gpu text-[8cqh]" style={{ animationDelay: `${i * 0.3}s` }}>
+                  <span className="anim-float gpu text-[8cqmin]" style={{ animationDelay: `${i * 0.3}s` }}>
                     {s.icon}
                   </span>
                   {/* Segundo animal en el paso de coleccionar */}
                   {i === 2 && (
-                    <span className="absolute -bottom-[1cqh] -right-[1cqh] text-[5cqh] drop-shadow">🐘</span>
+                    <span className="absolute -bottom-[1cqmin] -right-[1cqmin] text-[5cqmin] drop-shadow">🐘</span>
                   )}
                   {/* número del paso */}
-                  <span className="wood-3d absolute -left-[1cqh] -top-[1cqh] flex h-[5cqh] w-[5cqh] items-center justify-center rounded-full !border-[0.35cqh] font-display text-[2.6cqh] text-white">
+                  <span className="wood-3d absolute -left-[1cqmin] -top-[1cqmin] flex h-[5cqmin] w-[5cqmin] items-center justify-center rounded-full !border-[0.35cqmin] font-display text-[2.6cqmin] text-white">
                     {i + 1}
                   </span>
                 </div>
 
-                <h3 className="font-display text-[3cqh] text-wood-grain" style={{ textShadow: '0 1px 0 rgba(255,255,255,0.6)' }}>
+                <h3 className="font-display text-[3cqmin] text-wood-grain" style={{ textShadow: '0 1px 0 rgba(255,255,255,0.6)' }}>
                   {s.title}
                 </h3>
-                <p className="mt-[0.5cqh] font-body text-[2cqh] font-semibold leading-tight text-[#7a531f]">
+                <p className="mt-[0.5cqmin] font-body text-[2cqmin] font-semibold leading-tight text-[#7a531f]">
                   {s.desc}
                 </p>
               </motion.div>
@@ -126,7 +126,7 @@ export default function InstructionsModal({ onClose, onPlay }) {
           </div>
 
           {/* Botón de acción */}
-          <div className="mt-[3.5cqh] flex justify-center">
+          <div className="mt-[3.5cqmin] flex justify-center">
             <WoodButton size="lg" variant="leaf" glow onClick={onPlay}>
               🚢 ¡ZARPAR!
             </WoodButton>
@@ -134,7 +134,7 @@ export default function InstructionsModal({ onClose, onPlay }) {
         </div>
 
         {/* Rollo de madera inferior */}
-        <WoodRoll className="-mt-[1.5cqh]" />
+        <WoodRoll className="-mt-[1.5cqmin]" />
       </motion.div>
     </motion.div>
   )
@@ -144,18 +144,18 @@ export default function InstructionsModal({ onClose, onPlay }) {
 function WoodRoll({ className = '' }) {
   return (
     <div
-      className={`relative h-[5cqh] rounded-full ${className}`}
+      className={`relative h-[5cqmin] rounded-full ${className}`}
       style={{
         background:
           'linear-gradient(to bottom, var(--color-wood-light) 0%, var(--color-wood-rich) 45%, var(--color-wood-grain) 78%, var(--color-wood-deep) 100%)',
         boxShadow:
-          'inset 0 1cqh 0 rgba(255,235,190,0.5), inset 0 -1cqh 1cqh rgba(0,0,0,0.5), 0 0.6cqh 1.6cqh rgba(0,0,0,0.4)',
-        border: '0.4cqh solid var(--color-wood-edge)',
+          'inset 0 1cqmin 0 rgba(255,235,190,0.5), inset 0 -1cqmin 1cqmin rgba(0,0,0,0.5), 0 0.6cqmin 1.6cqmin rgba(0,0,0,0.4)',
+        border: '0.4cqmin solid var(--color-wood-edge)',
       }}
     >
       {/* topes laterales */}
-      <span className="absolute -left-[1.2cqw] top-1/2 h-[6.5cqh] w-[3cqw] -translate-y-1/2 rounded-full" style={{ background: 'radial-gradient(circle at 40% 35%, var(--color-wood-light), var(--color-wood-deep) 75%)', border: '0.4cqh solid var(--color-wood-edge)' }} />
-      <span className="absolute -right-[1.2cqw] top-1/2 h-[6.5cqh] w-[3cqw] -translate-y-1/2 rounded-full" style={{ background: 'radial-gradient(circle at 40% 35%, var(--color-wood-light), var(--color-wood-deep) 75%)', border: '0.4cqh solid var(--color-wood-edge)' }} />
+      <span className="absolute -left-[1.2cqw] top-1/2 h-[6.5cqmin] w-[3cqw] -translate-y-1/2 rounded-full" style={{ background: 'radial-gradient(circle at 40% 35%, var(--color-wood-light), var(--color-wood-deep) 75%)', border: '0.4cqmin solid var(--color-wood-edge)' }} />
+      <span className="absolute -right-[1.2cqw] top-1/2 h-[6.5cqmin] w-[3cqw] -translate-y-1/2 rounded-full" style={{ background: 'radial-gradient(circle at 40% 35%, var(--color-wood-light), var(--color-wood-deep) 75%)', border: '0.4cqmin solid var(--color-wood-edge)' }} />
     </div>
   )
 }

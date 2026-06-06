@@ -42,12 +42,12 @@ export default function Countdown({ onDone }) {
         {/* anillo pulsante */}
         <motion.div
           className="absolute rounded-full"
-          style={{ width: '34cqh', height: '34cqh', border: '0.8cqh solid rgba(255,255,255,0.5)' }}
+          style={{ width: '34cqmin', height: '34cqmin', border: '0.8cqmin solid rgba(255,255,255,0.5)' }}
           initial={{ scale: 0.6, opacity: 0.8 }}
           animate={{ scale: 1.4, opacity: 0 }}
           transition={{ duration: 0.7 }}
         />
-        <span className={`gold-text font-display ${isGo ? 'text-[16cqh]' : 'text-[26cqh]'}`} style={{ display: 'block', lineHeight: 1 }}>
+        <span className={`gold-text font-display ${isGo ? 'text-[16cqmin]' : 'text-[26cqmin]'}`} style={{ display: 'block', lineHeight: 1 }}>
           {STEPS[i]}
         </span>
       </motion.div>

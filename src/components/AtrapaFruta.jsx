@@ -119,13 +119,13 @@ export default function AtrapaFruta({ onWin, onLose, onCorrect, onCoins }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Encabezado */}
-      <div className="absolute inset-x-0 top-[3cqh] z-20 flex items-center justify-between px-[3cqw]">
-        <div className="wood-3d rounded-[1.4cqh] px-[2cqw] py-[0.6cqh] font-display text-[2.4cqh] text-white text-stroke">
+      <div className="absolute inset-x-0 top-[3cqmin] z-20 flex items-center justify-between px-[3cqw]">
+        <div className="wood-3d rounded-[1.4cqmin] px-[2cqw] py-[0.6cqmin] font-display text-[2.4cqmin] text-white text-stroke">
           🧺 {score}
         </div>
         <div className="flex items-center gap-[1cqw]">
-          <span className="text-[3cqh]">⏰</span>
-          <div className="wood-inset h-[2.4cqh] w-[26cqw] overflow-hidden rounded-full">
+          <span className="text-[3cqmin]">⏰</span>
+          <div className="wood-inset h-[2.4cqmin] w-[26cqw] overflow-hidden rounded-full">
             <motion.div
               className="h-full rounded-full"
               animate={{ width: `${pct}%` }}
@@ -133,15 +133,15 @@ export default function AtrapaFruta({ onWin, onLose, onCorrect, onCoins }) {
               style={{ background: danger ? 'var(--color-coral)' : 'var(--color-leaf-bright)' }}
             />
           </div>
-          <span className="font-display text-[2.8cqh] tabular-nums text-stroke" style={{ color: danger ? '#ff5252' : '#fff' }}>
+          <span className="font-display text-[2.8cqmin] tabular-nums text-stroke" style={{ color: danger ? '#ff5252' : '#fff' }}>
             {timeLeft}s
           </span>
         </div>
       </div>
 
       {/* Instrucción */}
-      <div className="absolute inset-x-0 top-[9cqh] z-10 flex justify-center">
-        <span className="font-display text-[2.2cqh] text-white/85 text-stroke">¡Toca las frutas, evita la 💣!</span>
+      <div className="absolute inset-x-0 top-[9cqmin] z-10 flex justify-center">
+        <span className="font-display text-[2.2cqmin] text-white/85 text-stroke">¡Toca las frutas, evita la 💣!</span>
       </div>
 
       {/* Objetos */}
@@ -161,14 +161,14 @@ export default function AtrapaFruta({ onWin, onLose, onCorrect, onCoins }) {
             style={{
               left: `${item.x}%`,
               top: `${item.y}%`,
-              width: '13cqh',
-              height: '13cqh',
-              fontSize: '8cqh',
+              width: '13cqmin',
+              height: '13cqmin',
+              fontSize: '8cqmin',
               transform: 'translate(-50%, -50%)',
               touchAction: 'none',
               background: item.bomb ? 'radial-gradient(circle at 50% 35%, #ffb3b3, #c0392b)' : 'radial-gradient(circle at 50% 35%, #fff6cf, #f6c453)',
-              border: '0.4cqh solid var(--color-wood-edge)',
-              boxShadow: '0 0.6cqh 1cqh rgba(0,0,0,0.35)',
+              border: '0.4cqmin solid var(--color-wood-edge)',
+              boxShadow: '0 0.6cqmin 1cqmin rgba(0,0,0,0.35)',
             }}
           >
             {item.emoji}
@@ -193,13 +193,13 @@ function ResultOverlay({ won, score, onReplay }) {
     >
       <div className="absolute inset-0 bg-black/55" />
       <motion.div
-        className="parchment relative z-10 flex flex-col items-center gap-[1.2cqh] rounded-[2.4cqh] px-[6cqw] py-[3cqh]"
+        className="parchment relative z-10 flex flex-col items-center gap-[1.2cqmin] rounded-[2.4cqmin] px-[6cqw] py-[3cqmin]"
         initial={{ scale: 0.7, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 260, damping: 16 }}
       >
-        <span className="gold-text font-display text-[5.5cqh] text-stroke-lg">{won ? '🎉 ¡Cosecha lista!' : '💥 ¡Bomba!'}</span>
-        <span className="font-display text-[3.4cqh] text-wood-dark">🧺 {score} frutas</span>
+        <span className="gold-text font-display text-[5.5cqmin] text-stroke-lg">{won ? '🎉 ¡Cosecha lista!' : '💥 ¡Bomba!'}</span>
+        <span className="font-display text-[3.4cqmin] text-wood-dark">🧺 {score} frutas</span>
         <WoodButton size="md" variant="leaf" glow onClick={onReplay}>
           🔁 Jugar de nuevo
         </WoodButton>

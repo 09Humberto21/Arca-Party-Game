@@ -37,10 +37,10 @@ const VARIANTS = {
 }
 
 const SIZES = {
-  sm: 'text-[2.4cqh] px-[2.2cqw] py-[1cqh] rounded-[1.4cqh] gap-[0.6cqw]',
-  md: 'text-[3.2cqh] px-[3cqw] py-[1.6cqh] rounded-[2cqh] gap-[0.8cqw]',
-  lg: 'text-[4.4cqh] px-[4cqw] py-[2cqh] rounded-[2.4cqh] gap-[1cqw]',
-  xl: 'text-[6cqh] px-[5.5cqw] py-[2.6cqh] rounded-[3cqh] gap-[1.2cqw]',
+  sm: 'text-[2.4cqmin] px-[2.2cqw] py-[1cqmin] rounded-[1.4cqmin] gap-[0.6cqw]',
+  md: 'text-[3.2cqmin] px-[3cqw] py-[1.6cqmin] rounded-[2cqmin] gap-[0.8cqw]',
+  lg: 'text-[4.4cqmin] px-[4cqw] py-[2cqmin] rounded-[2.4cqmin] gap-[1cqw]',
+  xl: 'text-[6cqmin] px-[5.5cqw] py-[2.6cqmin] rounded-[3cqmin] gap-[1.2cqw]',
 }
 
 export default function WoodButton({
@@ -67,7 +67,7 @@ export default function WoodButton({
       className={`gpu font-display ${v.base} ${SIZES[size]}
         relative inline-flex items-center justify-center overflow-hidden
         whitespace-nowrap tracking-wide text-stroke
-        border-[0.4cqh] border-white/70 ${className}`}
+        border-[0.4cqmin] border-white/70 ${className}`}
       {...rest}
     >
       {/* Sheen que cruza el botón — solo transform/opacity */}

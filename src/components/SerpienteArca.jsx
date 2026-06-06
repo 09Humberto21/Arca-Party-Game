@@ -17,7 +17,7 @@ import WoodButton from './WoodButton'
 
 const COLS = 15
 const ROWS = 11
-const CELL = 4.6 // cqh por celda
+const CELL = 4.6 // cqmin por celda
 const FOOD_SET = ['🐭', '🐰', '🐤', '🐟', '🍎', '🍇', '🥕', '🐞', '🦗']
 
 function buildConfig(level) {
@@ -166,55 +166,55 @@ export default function SerpienteArca({ onWin, onLose, onCorrect }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Encabezado */}
-      <div className="absolute inset-x-0 top-[12.5cqh] z-20 flex flex-col items-center gap-[1cqh]">
+      <div className="absolute inset-x-0 top-[12.5cqmin] z-20 flex flex-col items-center gap-[1cqmin]">
         <div
-          className="anim-sway gpu rounded-[1.6cqh] border-[0.5cqh] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[3cqw] py-[0.6cqh] font-display text-[2.3cqh] text-white text-stroke"
+          className="anim-sway gpu rounded-[1.6cqmin] border-[0.5cqmin] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[3cqw] py-[0.6cqmin] font-display text-[2.3cqmin] text-white text-stroke"
           style={{ boxShadow: '0 5px 0 var(--color-wood-dark), 0 10px 16px rgba(0,0,0,0.3)' }}
         >
           🐍 Nivel {level} · come {config.target} animales · usa las ⬆️⬅️⬇️➡️
         </div>
         <div className="flex items-center gap-[1.2cqw]">
-          <div className="wood-inset relative h-[2.8cqh] w-[30cqw] overflow-hidden rounded-full">
+          <div className="wood-inset relative h-[2.8cqmin] w-[30cqw] overflow-hidden rounded-full">
             <motion.div
               className="gloss h-full rounded-full"
               animate={{ width: `${pct}%` }}
               transition={{ ease: 'linear', duration: 0.15 }}
-              style={{ background: 'linear-gradient(to bottom, #69ffae, var(--color-leaf-bright) 55%, #00b85a)', boxShadow: 'inset 0 0.4cqh 0 rgba(255,255,255,0.5)' }}
+              style={{ background: 'linear-gradient(to bottom, #69ffae, var(--color-leaf-bright) 55%, #00b85a)', boxShadow: 'inset 0 0.4cqmin 0 rgba(255,255,255,0.5)' }}
             />
           </div>
-          <span className="font-display text-[3cqh] tabular-nums text-white text-stroke">{score}/{config.target}</span>
+          <span className="font-display text-[3cqmin] tabular-nums text-white text-stroke">{score}/{config.target}</span>
         </div>
       </div>
 
       {/* Tablero */}
-      <div className="absolute inset-x-0 top-[26cqh] z-10 flex justify-center">
+      <div className="absolute inset-x-0 top-[26cqmin] z-10 flex justify-center">
         <div
-          className="wood-3d relative rounded-[2cqh] p-[1cqh]"
-          style={{ width: `${boardW + 2}cqh`, height: `${boardH + 2}cqh` }}
+          className="wood-3d relative rounded-[2cqmin] p-[1cqmin]"
+          style={{ width: `${boardW + 2}cqmin`, height: `${boardH + 2}cqmin` }}
         >
           {/* playfield */}
           <div
-            className="relative overflow-hidden rounded-[1.2cqh]"
+            className="relative overflow-hidden rounded-[1.2cqmin]"
             style={{
-              width: `${boardW}cqh`,
-              height: `${boardH}cqh`,
+              width: `${boardW}cqmin`,
+              height: `${boardH}cqmin`,
               backgroundColor: '#06324f',
               backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.06) 0.1cqh, transparent 0.1cqh), linear-gradient(90deg, rgba(255,255,255,0.06) 0.1cqh, transparent 0.1cqh)',
-              backgroundSize: `${CELL}cqh ${CELL}cqh`,
-              boxShadow: 'inset 0 0 2cqh rgba(0,0,0,0.55)',
+                'linear-gradient(rgba(255,255,255,0.06) 0.1cqmin, transparent 0.1cqmin), linear-gradient(90deg, rgba(255,255,255,0.06) 0.1cqmin, transparent 0.1cqmin)',
+              backgroundSize: `${CELL}cqmin ${CELL}cqmin`,
+              boxShadow: 'inset 0 0 2cqmin rgba(0,0,0,0.55)',
             }}
           >
             {/* Comida */}
             <motion.div
               key={`${view.food.x}-${view.food.y}-${view.food.emoji}`}
               className="absolute flex items-center justify-center"
-              style={{ left: `${view.food.x * CELL}cqh`, top: `${view.food.y * CELL}cqh`, width: `${CELL}cqh`, height: `${CELL}cqh`, zIndex: 3 }}
+              style={{ left: `${view.food.x * CELL}cqmin`, top: `${view.food.y * CELL}cqmin`, width: `${CELL}cqmin`, height: `${CELL}cqmin`, zIndex: 3 }}
               initial={{ scale: 0.4 }}
               animate={{ scale: [1, 1.18, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             >
-              <span style={{ fontSize: `${CELL * 0.7}cqh` }}>{view.food.emoji}</span>
+              <span style={{ fontSize: `${CELL * 0.7}cqmin` }}>{view.food.emoji}</span>
             </motion.div>
 
             {/* Serpiente */}
@@ -225,20 +225,20 @@ export default function SerpienteArca({ onWin, onLose, onCorrect }) {
                   key={i}
                   className="absolute flex items-center justify-center"
                   style={{
-                    left: `${seg.x * CELL + CELL * 0.04}cqh`,
-                    top: `${seg.y * CELL + CELL * 0.04}cqh`,
-                    width: `${CELL * 0.92}cqh`,
-                    height: `${CELL * 0.92}cqh`,
+                    left: `${seg.x * CELL + CELL * 0.04}cqmin`,
+                    top: `${seg.y * CELL + CELL * 0.04}cqmin`,
+                    width: `${CELL * 0.92}cqmin`,
+                    height: `${CELL * 0.92}cqmin`,
                     borderRadius: isHead ? '40%' : '30%',
                     background: isHead
                       ? 'radial-gradient(circle at 50% 35%, #d9ffe9, #00c965 80%)'
                       : `linear-gradient(135deg, #34e08a, #16a35a)`,
-                    border: '0.25cqh solid rgba(0,80,40,0.6)',
-                    boxShadow: isHead ? '0 0 1.5cqh rgba(0,230,118,0.8)' : 'inset 0 -0.3cqh 0.4cqh rgba(0,0,0,0.25)',
+                    border: '0.25cqmin solid rgba(0,80,40,0.6)',
+                    boxShadow: isHead ? '0 0 1.5cqmin rgba(0,230,118,0.8)' : 'inset 0 -0.3cqmin 0.4cqmin rgba(0,0,0,0.25)',
                     zIndex: isHead ? 5 : 4,
                   }}
                 >
-                  {isHead && <span style={{ fontSize: `${CELL * 0.6}cqh` }}>{skin}</span>}
+                  {isHead && <span style={{ fontSize: `${CELL * 0.6}cqmin` }}>{skin}</span>}
                 </div>
               )
             })}
@@ -252,17 +252,17 @@ export default function SerpienteArca({ onWin, onLose, onCorrect }) {
           <motion.div className="absolute inset-0 z-50 flex items-center justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="absolute inset-0 bg-black/55" />
             <motion.div
-              className="parchment relative z-10 flex flex-col items-center gap-[2cqh] rounded-[2cqh] px-[8cqw] py-[5cqh]"
+              className="parchment relative z-10 flex flex-col items-center gap-[2cqmin] rounded-[2cqmin] px-[8cqw] py-[5cqmin]"
               initial={{ scale: 0.5, y: 30 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.6, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 240, damping: 16 }}
             >
-              <motion.div className="text-[12cqh]" animate={{ rotate: [-10, 10, -10], y: [0, -10, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
+              <motion.div className="text-[12cqmin]" animate={{ rotate: [-10, 10, -10], y: [0, -10, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
                 🐍
               </motion.div>
-              <h2 className="gold-text font-display text-[6cqh]">¡SERPIENTE LLENA!</h2>
-              <p className="font-body text-[2.6cqh] font-bold text-[#7a531f]">¡{config.target} animales a bordo! Sube de nivel 🚢</p>
+              <h2 className="gold-text font-display text-[6cqmin]">¡SERPIENTE LLENA!</h2>
+              <p className="font-body text-[2.6cqmin] font-bold text-[#7a531f]">¡{config.target} animales a bordo! Sube de nivel 🚢</p>
               <WoodButton size="lg" variant="leaf" glow onClick={restart}>
                 ➡️ Siguiente reto
               </WoodButton>

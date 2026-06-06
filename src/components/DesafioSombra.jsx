@@ -214,43 +214,43 @@ export default function DesafioSombra({ onWin, onLose, onCorrect }) {
       <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 45%, rgba(10,5,30,0.1) 0%, rgba(6,3,22,0.72) 78%)' }} />
 
       {/* ---------- Encabezado + reloj ---------- */}
-      <div className="absolute inset-x-0 top-[12.5cqh] z-20 flex flex-col items-center gap-[1.1cqh]">
+      <div className="absolute inset-x-0 top-[12.5cqmin] z-20 flex flex-col items-center gap-[1.1cqmin]">
         <div
-          className="anim-sway gpu rounded-[1.6cqh] border-[0.5cqh] border-grape bg-gradient-to-b from-[#b06bff] to-[#7b2ff7] px-[3cqw] py-[0.6cqh] font-display text-[2.4cqh] text-white text-stroke"
+          className="anim-sway gpu rounded-[1.6cqmin] border-[0.5cqmin] border-grape bg-gradient-to-b from-[#b06bff] to-[#7b2ff7] px-[3cqw] py-[0.6cqmin] font-display text-[2.4cqmin] text-white text-stroke"
           style={{ boxShadow: '0 5px 0 #5a1fb0, 0 10px 16px rgba(0,0,0,0.4)' }}
         >
           🔤 ¡Encuentra el nombre del animal en la sopa de letras!
         </div>
         <div className="flex items-center gap-[1.2cqw]">
-          <motion.span className="text-[3.6cqh]" animate={danger ? { rotate: [-12, 12, -12], scale: [1, 1.15, 1] } : { rotate: 0 }} transition={{ duration: 0.5, repeat: danger ? Infinity : 0 }}>
+          <motion.span className="text-[3.6cqmin]" animate={danger ? { rotate: [-12, 12, -12], scale: [1, 1.15, 1] } : { rotate: 0 }} transition={{ duration: 0.5, repeat: danger ? Infinity : 0 }}>
             ⏰
           </motion.span>
-          <div className="wood-inset relative h-[2.8cqh] w-[28cqw] overflow-hidden rounded-full">
+          <div className="wood-inset relative h-[2.8cqmin] w-[28cqw] overflow-hidden rounded-full">
             <motion.div
               className="gloss h-full rounded-full"
               animate={{ width: `${pct}%` }}
               transition={{ ease: 'linear', duration: 0.4 }}
               style={{
                 background: danger ? 'linear-gradient(to bottom, #ff8a8a, #e53935 60%, #b71c1c)' : 'linear-gradient(to bottom, #d3a8ff, var(--color-grape) 55%, #5a1fb0)',
-                boxShadow: 'inset 0 0.4cqh 0 rgba(255,255,255,0.5)',
+                boxShadow: 'inset 0 0.4cqmin 0 rgba(255,255,255,0.5)',
               }}
             />
           </div>
-          <span className="font-display text-[3.2cqh] tabular-nums text-stroke" style={{ color: danger ? '#ff5252' : '#fff' }}>{timeLeft}s</span>
+          <span className="font-display text-[3.2cqmin] tabular-nums text-stroke" style={{ color: danger ? '#ff5252' : '#fff' }}>{timeLeft}s</span>
         </div>
       </div>
 
       {/* ---------- Zona principal: silueta + sopa ---------- */}
-      <div className="absolute inset-x-0 top-[24cqh] z-10 flex items-center justify-center gap-[4cqw] px-[4cqw]">
+      <div className="absolute inset-x-0 top-[24cqmin] z-10 flex items-center justify-center gap-[4cqw] px-[4cqw]">
         {/* Silueta / animal a buscar */}
-        <div className="flex flex-col items-center gap-[1.4cqh]">
-          <div className="relative flex h-[28cqh] w-[28cqh] items-center justify-center">
+        <div className="flex flex-col items-center gap-[1.4cqmin]">
+          <div className="relative flex h-[28cqmin] w-[28cqmin] items-center justify-center">
             {won && (
               <div className="absolute inset-[-8%] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,236,168,0.9) 0%, rgba(255,215,0,0.2) 50%, transparent 70%)' }} />
             )}
             <motion.span
               className="relative"
-              style={{ fontSize: '22cqh' }}
+              style={{ fontSize: '22cqmin' }}
               animate={won ? { filter: 'brightness(1)', scale: [1, 1.2, 1] } : { filter: 'brightness(0)', scale: 1 }}
               transition={{ duration: 0.5 }}
             >
@@ -259,12 +259,12 @@ export default function DesafioSombra({ onWin, onLose, onCorrect }) {
           </div>
           {/* Cartel con la palabra a buscar */}
           <div
-            className="rounded-[1.4cqh] border-[0.5cqh] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[2.5cqw] py-[0.8cqh] font-display text-[3cqh] tracking-[0.3em] text-white text-stroke"
+            className="rounded-[1.4cqmin] border-[0.5cqmin] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[2.5cqw] py-[0.8cqmin] font-display text-[3cqmin] tracking-[0.3em] text-white text-stroke"
             style={{ boxShadow: '0 5px 0 var(--color-wood-dark)' }}
           >
             {won ? puzzle.target : puzzle.target.replace(/./g, '•')}
           </div>
-          <span className="font-body text-[1.9cqh] font-bold text-white/80">{won ? '¡Encontrado!' : `${puzzle.target.length} letras`}</span>
+          <span className="font-body text-[1.9cqmin] font-bold text-white/80">{won ? '¡Encontrado!' : `${puzzle.target.length} letras`}</span>
         </div>
 
         {/* Sopa de letras */}
@@ -275,8 +275,8 @@ export default function DesafioSombra({ onWin, onLose, onCorrect }) {
           onPointerUp={onUp}
           onPointerLeave={onUp}
           animate={shakeControls}
-          className="wood-3d grid touch-none rounded-[2cqh] p-[1.2cqh]"
-          style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)`, gap: '0.5cqh' }}
+          className="wood-3d grid touch-none rounded-[2cqmin] p-[1.2cqmin]"
+          style={{ gridTemplateColumns: `repeat(${SIZE}, 1fr)`, gap: '0.5cqmin' }}
         >
           {puzzle.grid.map((row, r) =>
             row.map((ch, c) => {
@@ -289,7 +289,7 @@ export default function DesafioSombra({ onWin, onLose, onCorrect }) {
                   data-cell
                   data-r={r}
                   data-c={c}
-                  className="flex h-[4.6cqh] w-[4.6cqh] select-none items-center justify-center rounded-[0.8cqh] font-display text-[2.6cqh]"
+                  className="flex h-[4.6cqmin] w-[4.6cqmin] select-none items-center justify-center rounded-[0.8cqmin] font-display text-[2.6cqmin]"
                   style={{
                     background: isFound
                       ? 'radial-gradient(circle at 50% 35%, #d8ffe9, #00e676 80%)'
@@ -297,8 +297,8 @@ export default function DesafioSombra({ onWin, onLose, onCorrect }) {
                       ? 'radial-gradient(circle at 50% 35%, #fff2c2, var(--color-gold) 85%)'
                       : 'linear-gradient(to bottom, #fff7e6, #f0d9a8)',
                     color: isFound ? '#0a5' : 'var(--color-wood-edge)',
-                    border: '0.25cqh solid rgba(120,70,25,0.4)',
-                    boxShadow: isSel || isFound ? '0 0 1cqh rgba(255,200,60,0.7)' : 'inset 0 -0.3cqh 0.4cqh rgba(0,0,0,0.15)',
+                    border: '0.25cqmin solid rgba(120,70,25,0.4)',
+                    boxShadow: isSel || isFound ? '0 0 1cqmin rgba(255,200,60,0.7)' : 'inset 0 -0.3cqmin 0.4cqmin rgba(0,0,0,0.15)',
                     cursor: 'pointer',
                   }}
                 >
@@ -316,17 +316,17 @@ export default function DesafioSombra({ onWin, onLose, onCorrect }) {
           <motion.div className="absolute inset-0 z-50 flex items-center justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="absolute inset-0 bg-black/55" />
             <motion.div
-              className="parchment relative z-10 flex flex-col items-center gap-[2cqh] rounded-[2cqh] px-[8cqw] py-[5cqh]"
+              className="parchment relative z-10 flex flex-col items-center gap-[2cqmin] rounded-[2cqmin] px-[8cqw] py-[5cqmin]"
               initial={{ scale: 0.5, y: 30 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.6, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 240, damping: 16 }}
             >
-              <motion.div className="text-[12cqh]" animate={{ rotate: [-10, 10, -10], y: [0, -10, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
+              <motion.div className="text-[12cqmin]" animate={{ rotate: [-10, 10, -10], y: [0, -10, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
                 {puzzle.item.emoji}
               </motion.div>
-              <h2 className="gold-text font-display text-[6cqh]">¡{puzzle.target}! 🎉</h2>
-              <p className="font-body text-[2.6cqh] font-bold text-[#7a531f]">¡Palabra encontrada! El reto sube de nivel 🚢</p>
+              <h2 className="gold-text font-display text-[6cqmin]">¡{puzzle.target}! 🎉</h2>
+              <p className="font-body text-[2.6cqmin] font-bold text-[#7a531f]">¡Palabra encontrada! El reto sube de nivel 🚢</p>
               <WoodButton size="lg" variant="leaf" glow onClick={restart}>
                 ➡️ Siguiente sopa
               </WoodButton>

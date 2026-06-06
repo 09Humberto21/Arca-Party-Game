@@ -19,7 +19,7 @@ import WoodButton from './WoodButton'
 
 const COLS = 13
 const ROWS = 9
-const CELL = 6 // cqh
+const CELL = 6 // cqmin
 const FUSE = 2000
 const BLAST_MS = 500
 const SLIDE_MS = 85 // ms por celda al patear una bomba
@@ -384,9 +384,9 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Encabezado + power-ups activos */}
-      <div className="absolute inset-x-0 top-[11.5cqh] z-20 flex flex-col items-center gap-[0.7cqh]">
+      <div className="absolute inset-x-0 top-[11.5cqmin] z-20 flex flex-col items-center gap-[0.7cqmin]">
         <div
-          className="anim-sway gpu rounded-[1.6cqh] border-[0.5cqh] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[3cqw] py-[0.5cqh] font-display text-[2.1cqh] text-white text-stroke"
+          className="anim-sway gpu rounded-[1.6cqmin] border-[0.5cqmin] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[3cqw] py-[0.5cqmin] font-display text-[2.1cqmin] text-white text-stroke"
           style={{ boxShadow: '0 5px 0 var(--color-wood-dark), 0 8px 14px rgba(0,0,0,0.3)' }}
         >
           💣 Flechas + ESPACIO · enemigos: {remaining}{p?.remote ? ' · X = detonar' : ''}
@@ -405,9 +405,9 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
       </div>
 
       {/* Tablero */}
-      <div className="absolute inset-x-0 top-[22.5cqh] z-10 flex justify-center">
-        <div className="wood-3d relative rounded-[1.6cqh] p-[0.8cqh]" style={{ width: `${boardW + 1.6}cqh`, height: `${boardH + 1.6}cqh` }}>
-          <div className="relative overflow-hidden rounded-[1cqh]" style={{ width: `${boardW}cqh`, height: `${boardH}cqh`, background: '#3a7d44' }}>
+      <div className="absolute inset-x-0 top-[22.5cqmin] z-10 flex justify-center">
+        <div className="wood-3d relative rounded-[1.6cqmin] p-[0.8cqmin]" style={{ width: `${boardW + 1.6}cqmin`, height: `${boardH + 1.6}cqmin` }}>
+          <div className="relative overflow-hidden rounded-[1cqmin]" style={{ width: `${boardW}cqmin`, height: `${boardH}cqmin`, background: '#3a7d44' }}>
             <BoardTiles grid={grid} />
             {view && (
               <>
@@ -416,7 +416,7 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
                   <Entity key={`i-${it.id}`} x={it.x} y={it.y} z={5}>
                     <motion.span
                       className="flex items-center justify-center rounded-full"
-                      style={{ width: `${CELL * 0.8}cqh`, height: `${CELL * 0.8}cqh`, background: `radial-gradient(circle at 50% 35%, #fff, ${ITEM_INFO[it.type].tint} 80%)`, border: '0.3cqh solid rgba(255,255,255,0.9)', boxShadow: `0 0 1.4cqh ${ITEM_INFO[it.type].tint}`, fontSize: `${CELL * 0.45}cqh` }}
+                      style={{ width: `${CELL * 0.8}cqmin`, height: `${CELL * 0.8}cqmin`, background: `radial-gradient(circle at 50% 35%, #fff, ${ITEM_INFO[it.type].tint} 80%)`, border: '0.3cqmin solid rgba(255,255,255,0.9)', boxShadow: `0 0 1.4cqmin ${ITEM_INFO[it.type].tint}`, fontSize: `${CELL * 0.45}cqmin` }}
                       animate={{ scale: [1, 1.12, 1] }}
                       transition={{ duration: 0.9, repeat: Infinity }}
                     >
@@ -430,9 +430,9 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
                   <div
                     key={`b-${b.id}`}
                     className="absolute flex items-center justify-center"
-                    style={{ width: `${CELL}cqh`, height: `${CELL}cqh`, transform: `translate(${b.x * CELL}cqh, ${b.y * CELL}cqh)`, transition: 'transform 0.08s linear', zIndex: 6 }}
+                    style={{ width: `${CELL}cqmin`, height: `${CELL}cqmin`, transform: `translate(${b.x * CELL}cqmin, ${b.y * CELL}cqmin)`, transition: 'transform 0.08s linear', zIndex: 6 }}
                   >
-                    <motion.span style={{ fontSize: `${CELL * 0.7}cqh` }} animate={{ scale: [1, 1.22, 1] }} transition={{ duration: 0.45, repeat: Infinity }}>
+                    <motion.span style={{ fontSize: `${CELL * 0.7}cqmin` }} animate={{ scale: [1, 1.22, 1] }} transition={{ duration: 0.45, repeat: Infinity }}>
                       💣
                     </motion.span>
                   </div>
@@ -443,23 +443,23 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
                   <div
                     key={`x-${b.id}`}
                     className="absolute flex items-center justify-center"
-                    style={{ width: `${CELL}cqh`, height: `${CELL}cqh`, transform: `translate(${b.x * CELL}cqh, ${b.y * CELL}cqh)`, zIndex: 8, background: 'radial-gradient(circle, rgba(255,240,150,0.95), rgba(255,140,40,0.85) 55%, rgba(255,80,20,0.3) 80%)', borderRadius: '20%', boxShadow: '0 0 2cqh rgba(255,160,40,0.9)' }}
+                    style={{ width: `${CELL}cqmin`, height: `${CELL}cqmin`, transform: `translate(${b.x * CELL}cqmin, ${b.y * CELL}cqmin)`, zIndex: 8, background: 'radial-gradient(circle, rgba(255,240,150,0.95), rgba(255,140,40,0.85) 55%, rgba(255,80,20,0.3) 80%)', borderRadius: '20%', boxShadow: '0 0 2cqmin rgba(255,160,40,0.9)' }}
                   >
-                    <span style={{ fontSize: `${CELL * 0.6}cqh` }}>💥</span>
+                    <span style={{ fontSize: `${CELL * 0.6}cqmin` }}>💥</span>
                   </div>
                 ))}
 
                 {/* Enemigos */}
                 {view.enemies.filter((e) => e.alive).map((e) => (
                   <Entity key={`e-${e.id}`} x={e.x} y={e.y} z={7} smooth>
-                    <span style={{ fontSize: `${CELL * 0.72}cqh` }}>{ENEMY_EMOJIS[e.id % ENEMY_EMOJIS.length]}</span>
+                    <span style={{ fontSize: `${CELL * 0.72}cqmin` }}>{ENEMY_EMOJIS[e.id % ENEMY_EMOJIS.length]}</span>
                   </Entity>
                 ))}
 
                 {/* Jugador */}
                 {view.player.alive && (
                   <Entity x={view.player.x} y={view.player.y} z={9} smooth>
-                    <span className="drop-shadow" style={{ fontSize: `${CELL * 0.74}cqh`, filter: view.player.shield ? 'drop-shadow(0 0 0.6cqh #56ccf2)' : 'none' }}>{skin}</span>
+                    <span className="drop-shadow" style={{ fontSize: `${CELL * 0.74}cqmin`, filter: view.player.shield ? 'drop-shadow(0 0 0.6cqmin #56ccf2)' : 'none' }}>{skin}</span>
                   </Entity>
                 )}
               </>
@@ -473,17 +473,17 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
           <motion.div className="absolute inset-0 z-50 flex items-center justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="absolute inset-0 bg-black/55" />
             <motion.div
-              className="parchment relative z-10 flex flex-col items-center gap-[2cqh] rounded-[2cqh] px-[8cqw] py-[5cqh]"
+              className="parchment relative z-10 flex flex-col items-center gap-[2cqmin] rounded-[2cqmin] px-[8cqw] py-[5cqmin]"
               initial={{ scale: 0.5, y: 30 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.6, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 240, damping: 16 }}
             >
-              <motion.div className="text-[12cqh]" animate={{ rotate: [-10, 10, -10], y: [0, -10, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
+              <motion.div className="text-[12cqmin]" animate={{ rotate: [-10, 10, -10], y: [0, -10, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
                 💣
               </motion.div>
-              <h2 className="gold-text font-display text-[6cqh]">¡ZONA DESPEJADA!</h2>
-              <p className="font-body text-[2.6cqh] font-bold text-[#7a531f]">¡Enemigos eliminados! Sube de nivel 🚢</p>
+              <h2 className="gold-text font-display text-[6cqmin]">¡ZONA DESPEJADA!</h2>
+              <p className="font-body text-[2.6cqmin] font-bold text-[#7a531f]">¡Enemigos eliminados! Sube de nivel 🚢</p>
               <WoodButton size="lg" variant="leaf" glow onClick={restart}>
                 ➡️ Siguiente reto
               </WoodButton>
@@ -497,7 +497,7 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
 
 function Chip({ children }) {
   return (
-    <span className="wood-inset rounded-full px-[1.1cqw] py-[0.3cqh] font-display text-[1.9cqh] text-white text-stroke tabular-nums">
+    <span className="wood-inset rounded-full px-[1.1cqw] py-[0.3cqmin] font-display text-[1.9cqmin] text-white text-stroke tabular-nums">
       {children}
     </span>
   )
@@ -510,11 +510,11 @@ const BoardTiles = memo(function BoardTiles({ grid }) {
 })
 
 function Tile({ x, y, cell }) {
-  const base = { position: 'absolute', width: `${CELL}cqh`, height: `${CELL}cqh`, transform: `translate(${x * CELL}cqh, ${y * CELL}cqh)` }
+  const base = { position: 'absolute', width: `${CELL}cqmin`, height: `${CELL}cqmin`, transform: `translate(${x * CELL}cqmin, ${y * CELL}cqmin)` }
   if (cell === 1)
-    return <div style={{ ...base, zIndex: 2, background: 'linear-gradient(145deg, #8a98a6, #4a5a68)', border: '0.3cqh solid #2f3b46', borderRadius: '12%', boxShadow: 'inset 0 0.4cqh 0 rgba(255,255,255,0.3), inset 0 -0.5cqh 0.6cqh rgba(0,0,0,0.4)' }} />
+    return <div style={{ ...base, zIndex: 2, background: 'linear-gradient(145deg, #8a98a6, #4a5a68)', border: '0.3cqmin solid #2f3b46', borderRadius: '12%', boxShadow: 'inset 0 0.4cqmin 0 rgba(255,255,255,0.3), inset 0 -0.5cqmin 0.6cqmin rgba(0,0,0,0.4)' }} />
   if (cell === 2)
-    return <div style={{ ...base, zIndex: 3, background: 'repeating-linear-gradient(45deg, #d6973f 0 0.8cqh, #b5781f 0.8cqh 1.6cqh)', border: '0.35cqh solid #7a4f12', borderRadius: '14%', boxShadow: 'inset 0 0.4cqh 0 rgba(255,230,180,0.4), inset 0 -0.5cqh 0.6cqh rgba(0,0,0,0.35)' }} />
+    return <div style={{ ...base, zIndex: 3, background: 'repeating-linear-gradient(45deg, #d6973f 0 0.8cqmin, #b5781f 0.8cqmin 1.6cqmin)', border: '0.35cqmin solid #7a4f12', borderRadius: '14%', boxShadow: 'inset 0 0.4cqmin 0 rgba(255,230,180,0.4), inset 0 -0.5cqmin 0.6cqmin rgba(0,0,0,0.35)' }} />
   return <div style={{ ...base, zIndex: 1, background: (x + y) % 2 === 0 ? '#3f8a4a' : '#368040' }} />
 }
 
@@ -522,7 +522,7 @@ function Entity({ x, y, z, smooth = false, children }) {
   return (
     <div
       className="absolute flex items-center justify-center"
-      style={{ width: `${CELL}cqh`, height: `${CELL}cqh`, transform: `translate(${x * CELL}cqh, ${y * CELL}cqh)`, transition: smooth ? 'transform 0.09s linear' : 'none', zIndex: z }}
+      style={{ width: `${CELL}cqmin`, height: `${CELL}cqmin`, transform: `translate(${x * CELL}cqmin, ${y * CELL}cqmin)`, transition: smooth ? 'transform 0.09s linear' : 'none', zIndex: z }}
     >
       {children}
     </div>

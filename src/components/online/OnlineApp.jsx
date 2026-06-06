@@ -50,7 +50,7 @@ export default function OnlineApp() {
             <motion.button
               onClick={exit}
               whileTap={{ scale: 0.9 }}
-              className="wood-3d absolute left-[1.5cqw] top-[2cqh] z-50 flex h-[6cqh] w-[6cqh] items-center justify-center rounded-full text-[3cqh]"
+              className="wood-3d absolute left-[1.5cqw] top-[2cqmin] z-50 flex h-[6cqmin] w-[6cqmin] items-center justify-center rounded-full text-[3cqmin]"
               aria-label="Salir de la sala"
             >
               🚪
@@ -70,9 +70,9 @@ function RoundIntro() {
   const meta = MINIGAME_META[currentMinigame] || { name: currentMinigame, emoji: '🎮', hint: '' }
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center gap-[2cqh]">
+    <div className="relative flex h-full w-full flex-col items-center justify-center gap-[2cqmin]">
       <motion.span
-        className="font-display text-[3.2cqh] text-white text-stroke"
+        className="font-display text-[3.2cqmin] text-white text-stroke"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -81,7 +81,7 @@ function RoundIntro() {
 
       <motion.div
         key={currentMinigame}
-        className="anim-float text-[20cqh]"
+        className="anim-float text-[20cqmin]"
         initial={{ scale: 0.3, opacity: 0, rotate: -20 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
         transition={{ type: 'spring', stiffness: 260, damping: 14 }}
@@ -90,7 +90,7 @@ function RoundIntro() {
       </motion.div>
 
       <motion.span
-        className="gold-text font-display text-[6cqh] text-stroke-lg"
+        className="gold-text font-display text-[6cqmin] text-stroke-lg"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.15 }}
@@ -99,7 +99,7 @@ function RoundIntro() {
       </motion.span>
 
       <motion.span
-        className="font-display text-[2.8cqh] text-white/90 text-stroke"
+        className="font-display text-[2.8cqmin] text-white/90 text-stroke"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -108,7 +108,7 @@ function RoundIntro() {
       </motion.span>
 
       <motion.span
-        className="anim-float font-display text-[3.4cqh] text-leaf-bright text-stroke"
+        className="anim-float font-display text-[3.4cqmin] text-leaf-bright text-stroke"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}

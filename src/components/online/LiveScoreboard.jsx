@@ -11,7 +11,7 @@ export default function LiveScoreboard() {
   const ranked = [...players].sort((a, b) => b.roundScore - a.roundScore)
 
   return (
-    <div className="pointer-events-none absolute right-[1.5cqw] top-[2cqh] z-30 flex w-[24cqw] flex-col gap-[0.5cqh]">
+    <div className="pointer-events-none absolute right-[1.5cqw] top-[2cqmin] z-30 flex w-[24cqw] flex-col gap-[0.5cqmin]">
       <AnimatePresence>
         {ranked.map((p, i) => (
           <motion.div
@@ -21,16 +21,16 @@ export default function LiveScoreboard() {
             animate={{ opacity: p.connected ? 1 : 0.4, x: 0 }}
             exit={{ opacity: 0, x: 30 }}
             transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-            className="wood-inset flex items-center gap-[0.8cqw] rounded-[1.2cqh] px-[1cqw] py-[0.5cqh]"
-            style={{ outline: p.id === me ? '0.4cqh solid var(--color-gold)' : 'none' }}
+            className="wood-inset flex items-center gap-[0.8cqw] rounded-[1.2cqmin] px-[1cqw] py-[0.5cqmin]"
+            style={{ outline: p.id === me ? '0.4cqmin solid var(--color-gold)' : 'none' }}
           >
-            <span className="w-[2.4cqh] text-center font-display text-[2.2cqh] text-gold text-stroke">
+            <span className="w-[2.4cqmin] text-center font-display text-[2.2cqmin] text-gold text-stroke">
               {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}
             </span>
-            <span className="text-[2.8cqh]">{p.skin}</span>
-            <span className="flex-1 truncate font-display text-[2cqh] text-white text-stroke">{p.nickname}</span>
-            {p.finished && <span className="text-[2cqh]">🏁</span>}
-            <span className="font-display text-[2.4cqh] text-leaf-bright text-stroke">{p.roundScore}</span>
+            <span className="text-[2.8cqmin]">{p.skin}</span>
+            <span className="flex-1 truncate font-display text-[2cqmin] text-white text-stroke">{p.nickname}</span>
+            {p.finished && <span className="text-[2cqmin]">🏁</span>}
+            <span className="font-display text-[2.4cqmin] text-leaf-bright text-stroke">{p.roundScore}</span>
           </motion.div>
         ))}
       </AnimatePresence>

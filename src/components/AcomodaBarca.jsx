@@ -50,8 +50,8 @@ function buildConfig(level) {
   const swim = Math.min(22, 7 + level * 2.5) // amplitud px del nado
   const swimDur = Math.max(1.6, 3.6 - level * 0.3) // s (más rápido al subir)
   // Tamaños según cuántos animales hay (para que quepan en 16:9)
-  const size = count <= 4 ? 14 : count <= 6 ? 11 : 8.8 // cqh
-  const emoji = count <= 4 ? 9 : count <= 6 ? 7 : 5.6 // cqh
+  const size = count <= 4 ? 14 : count <= 6 ? 11 : 8.8 // cqmin
+  const emoji = count <= 4 ? 9 : count <= 6 ? 7 : 5.6 // cqmin
   const gap = count <= 4 ? 3 : count <= 6 ? 2 : 1.3 // cqw
   return { count, time, animals, slots, swim, swimDur, size, emoji, gap }
 }
@@ -124,9 +124,9 @@ export default function AcomodaBarca({ onWin, onLose, onCorrect }) {
   return (
     <div ref={fieldRef} className="absolute inset-0 overflow-hidden">
       {/* ---------- Encabezado: instrucción + temporizador ---------- */}
-      <div className="absolute inset-x-0 top-[12.5cqh] z-20 flex flex-col items-center gap-[1.4cqh]">
+      <div className="absolute inset-x-0 top-[12.5cqmin] z-20 flex flex-col items-center gap-[1.4cqmin]">
         <div
-          className="anim-sway gpu rounded-[1.6cqh] border-[0.5cqh] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[3cqw] py-[0.7cqh] font-display text-[2.4cqh] text-white text-stroke"
+          className="anim-sway gpu rounded-[1.6cqmin] border-[0.5cqmin] border-wood-dark bg-gradient-to-b from-wood-light to-wood px-[3cqw] py-[0.7cqmin] font-display text-[2.4cqmin] text-white text-stroke"
           style={{ boxShadow: '0 5px 0 var(--color-wood-dark), 0 10px 16px rgba(0,0,0,0.3)' }}
         >
           🧩 Nivel {level} · ¡acomoda {config.count} animales!
@@ -134,13 +134,13 @@ export default function AcomodaBarca({ onWin, onLose, onCorrect }) {
 
         <div className="flex items-center gap-[1.2cqw]">
           <motion.span
-            className="text-[4.2cqh]"
+            className="text-[4.2cqmin]"
             animate={danger ? { rotate: [-12, 12, -12], scale: [1, 1.15, 1] } : { rotate: 0 }}
             transition={{ duration: 0.5, repeat: danger ? Infinity : 0 }}
           >
             ⏰
           </motion.span>
-          <div className="wood-inset relative h-[3cqh] w-[32cqw] overflow-hidden rounded-full">
+          <div className="wood-inset relative h-[3cqmin] w-[32cqw] overflow-hidden rounded-full">
             <motion.div
               className="gloss h-full rounded-full"
               animate={{ width: `${pct}%` }}
@@ -149,12 +149,12 @@ export default function AcomodaBarca({ onWin, onLose, onCorrect }) {
                 background: danger
                   ? 'linear-gradient(to bottom, #ff8a8a, #e53935 60%, #b71c1c)'
                   : 'linear-gradient(to bottom, #7be3ff, var(--color-ocean) 55%, var(--color-ocean-deep))',
-                boxShadow: 'inset 0 0.4cqh 0 rgba(255,255,255,0.5)',
+                boxShadow: 'inset 0 0.4cqmin 0 rgba(255,255,255,0.5)',
               }}
             />
           </div>
           <span
-            className="font-display text-[3.4cqh] tabular-nums text-stroke"
+            className="font-display text-[3.4cqmin] tabular-nums text-stroke"
             style={{ color: danger ? '#ff5252' : '#fff' }}
           >
             {timeLeft}s
@@ -163,9 +163,9 @@ export default function AcomodaBarca({ onWin, onLose, onCorrect }) {
       </div>
 
       {/* ---------- Cubierta del arca con siluetas ---------- */}
-      <div className="absolute inset-x-0 top-[28cqh] z-10 flex justify-center px-[3cqw]">
+      <div className="absolute inset-x-0 top-[28cqmin] z-10 flex justify-center px-[3cqw]">
         <div
-          className="wood-3d flex max-w-[92cqw] flex-wrap items-center justify-center rounded-[3cqh] px-[3cqw] py-[2.4cqh]"
+          className="wood-3d flex max-w-[92cqw] flex-wrap items-center justify-center rounded-[3cqmin] px-[3cqw] py-[2.4cqmin]"
           style={{ gap: `${config.gap}cqw` }}
         >
           {config.slots.map((id) => (
@@ -183,7 +183,7 @@ export default function AcomodaBarca({ onWin, onLose, onCorrect }) {
 
       {/* ---------- Bandeja de animales nadando en el agua ---------- */}
       <div
-        className="absolute inset-x-0 bottom-[5cqh] z-30 flex max-w-[94cqw] flex-wrap justify-center"
+        className="absolute inset-x-0 bottom-[5cqmin] z-30 flex max-w-[94cqw] flex-wrap justify-center"
         style={{ gap: `${config.gap}cqw`, margin: '0 auto' }}
       >
         {config.animals.map((a, i) => (
@@ -217,22 +217,22 @@ function Slot({ emoji, placed, size, emojiSize, refCb }) {
     <div
       ref={refCb}
       className="wood-inset relative flex items-center justify-center rounded-full"
-      style={{ height: `${size}cqh`, width: `${size}cqh` }}
+      style={{ height: `${size}cqmin`, width: `${size}cqmin` }}
     >
       <span
         className="transition-opacity duration-300"
-        style={{ fontSize: `${emojiSize}cqh`, filter: 'brightness(0)', opacity: placed ? 0 : 0.28 }}
+        style={{ fontSize: `${emojiSize}cqmin`, filter: 'brightness(0)', opacity: placed ? 0 : 0.28 }}
       >
         {emoji}
       </span>
       <AnimatePresence>
         {placed && (
           <motion.span
-            className="absolute inset-[-0.6cqh] rounded-full"
+            className="absolute inset-[-0.6cqmin] rounded-full"
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{ boxShadow: '0 0 2.5cqh rgba(0,230,118,0.9), inset 0 0 1.5cqh rgba(0,230,118,0.6)', border: '0.5cqh solid #00e676' }}
+            style={{ boxShadow: '0 0 2.5cqmin rgba(0,230,118,0.9), inset 0 0 1.5cqmin rgba(0,230,118,0.6)', border: '0.5cqmin solid #00e676' }}
           />
         )}
       </AnimatePresence>
@@ -293,26 +293,26 @@ function DraggableAnimal({ animal, index, config, fieldRef, slotRef, placed, pau
       <div
         className={`relative flex items-center justify-center rounded-full ${idle ? 'anim-swim' : ''}`}
         style={{
-          height: `${config.size}cqh`,
-          width: `${config.size}cqh`,
+          height: `${config.size}cqmin`,
+          width: `${config.size}cqmin`,
           ['--ax']: `${config.swim * sign}px`,
           ['--ay']: `${config.swim * 0.7}px`,
           ['--swim-dur']: `${config.swimDur + index * 0.15}s`,
           background: placed
             ? 'radial-gradient(circle at 50% 35%, #d8ffe9, #00e676 75%)'
             : 'radial-gradient(circle at 50% 35%, #fff7df, #f2b84b 78%)',
-          border: '0.5cqh solid var(--color-wood-edge)',
+          border: '0.5cqmin solid var(--color-wood-edge)',
           boxShadow: dragging
-            ? '0 2cqh 2.5cqh rgba(0,0,0,0.45), 0 0 3cqh rgba(255,215,0,0.7)'
-            : 'inset 0 -0.6cqh 1cqh rgba(0,0,0,0.3), 0 0.8cqh 1.2cqh rgba(0,0,0,0.3)',
+            ? '0 2cqmin 2.5cqmin rgba(0,0,0,0.45), 0 0 3cqmin rgba(255,215,0,0.7)'
+            : 'inset 0 -0.6cqmin 1cqmin rgba(0,0,0,0.3), 0 0.8cqmin 1.2cqmin rgba(0,0,0,0.3)',
         }}
       >
-        <span style={{ fontSize: `${config.emoji}cqh` }} className="drop-shadow">
+        <span style={{ fontSize: `${config.emoji}cqmin` }} className="drop-shadow">
           {animal.emoji}
         </span>
         {placed && (
           <motion.span
-            className="absolute -right-[0.5cqh] -top-[0.5cqh] text-[3.4cqh]"
+            className="absolute -right-[0.5cqmin] -top-[0.5cqmin] text-[3.4cqmin]"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 400, damping: 12 }}
@@ -339,23 +339,23 @@ function ResultOverlay({ status, onRestart }) {
     >
       <div className="absolute inset-0 bg-black/55" />
       <motion.div
-        className="parchment relative z-10 flex flex-col items-center gap-[2cqh] rounded-[2cqh] px-[8cqw] py-[5cqh]"
+        className="parchment relative z-10 flex flex-col items-center gap-[2cqmin] rounded-[2cqmin] px-[8cqw] py-[5cqmin]"
         initial={{ scale: 0.5, y: 30 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.6, opacity: 0 }}
         transition={{ type: 'spring', stiffness: 240, damping: 16 }}
       >
         <motion.div
-          className="text-[12cqh]"
+          className="text-[12cqmin]"
           animate={{ rotate: won ? [-10, 10, -10] : 0, y: won ? [0, -10, 0] : 0 }}
           transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
         >
           {won ? '🎉' : '⏳'}
         </motion.div>
-        <h2 className="gold-text font-display text-[6cqh]">
+        <h2 className="gold-text font-display text-[6cqmin]">
           {won ? '¡NIVEL SUPERADO!' : '¡SE ACABÓ EL TIEMPO!'}
         </h2>
-        <p className="font-body text-[2.6cqh] font-bold text-[#7a531f]">
+        <p className="font-body text-[2.6cqmin] font-bold text-[#7a531f]">
           {won ? '¡Todos a bordo! El reto sube de nivel 🚢' : 'Perdiste una vida ❤️'}
         </p>
         <WoodButton size="lg" variant={won ? 'leaf' : 'gold'} glow onClick={onRestart}>

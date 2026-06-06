@@ -95,21 +95,21 @@ export default function OnlineGameLoop() {
   return (
     <>
       {/* Barra superior: minijuego + puntaje + cronómetro */}
-      <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-[2cqw] pt-[1cqh]">
-        <div className="wood-3d flex items-center gap-[1cqw] rounded-[1.4cqh] px-[1.5cqw] py-[0.6cqh]">
-          <span className="text-[3cqh]">{meta.emoji}</span>
-          <span className="font-display text-[2.4cqh] text-white text-stroke">{meta.name}</span>
+      <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-[2cqw] pt-[1cqmin]">
+        <div className="wood-3d flex items-center gap-[1cqw] rounded-[1.4cqmin] px-[1.5cqw] py-[0.6cqmin]">
+          <span className="text-[3cqmin]">{meta.emoji}</span>
+          <span className="font-display text-[2.4cqmin] text-white text-stroke">{meta.name}</span>
         </div>
-        <div className="wood-3d flex items-center gap-[0.8cqw] rounded-[1.4cqh] px-[1.5cqw] py-[0.6cqh]">
-          <span className="text-[2.6cqh]">⭐</span>
-          <span className="font-display text-[3cqh] text-leaf-bright text-stroke">{score}</span>
+        <div className="wood-3d flex items-center gap-[0.8cqw] rounded-[1.4cqmin] px-[1.5cqw] py-[0.6cqmin]">
+          <span className="text-[2.6cqmin]">⭐</span>
+          <span className="font-display text-[3cqmin] text-leaf-bright text-stroke">{score}</span>
         </div>
       </div>
 
       {/* Cronómetro de la ronda */}
-      <div className="absolute inset-x-[2cqw] top-[6.5cqh] z-30 flex items-center gap-[1cqw]">
-        <span className="font-display text-[2.6cqh] text-white text-stroke">⏱️ {secondsLeft}s</span>
-        <div className="wood-inset h-[1.6cqh] flex-1 overflow-hidden rounded-full">
+      <div className="absolute inset-x-[2cqw] top-[6.5cqmin] z-30 flex items-center gap-[1cqw]">
+        <span className="font-display text-[2.6cqmin] text-white text-stroke">⏱️ {secondsLeft}s</span>
+        <div className="wood-inset h-[1.6cqmin] flex-1 overflow-hidden rounded-full">
           <motion.div
             className="h-full rounded-full"
             style={{ width: `${pct}%`, background: pct < 25 ? 'var(--color-coral)' : 'var(--color-leaf-bright)' }}
@@ -135,20 +135,20 @@ export default function OnlineGameLoop() {
       {/* Esperando a los demás cuando ya terminaste */}
       {done && (
         <motion.div
-          className="absolute inset-0 z-40 flex flex-col items-center justify-center gap-[1.5cqh]"
+          className="absolute inset-0 z-40 flex flex-col items-center justify-center gap-[1.5cqmin]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
           <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px]" />
           <motion.div
-            className="relative z-10 flex flex-col items-center gap-[1cqh]"
+            className="relative z-10 flex flex-col items-center gap-[1cqmin]"
             initial={{ scale: 0.7 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 260, damping: 16 }}
           >
-            <span className="gold-text font-display text-[7cqh] text-stroke-lg">¡Terminaste!</span>
-            <span className="font-display text-[4cqh] text-leaf-bright text-stroke">⭐ {score} puntos</span>
-            <span className="anim-float font-display text-[3cqh] text-white text-stroke">Esperando a los demás… 🛶</span>
+            <span className="gold-text font-display text-[7cqmin] text-stroke-lg">¡Terminaste!</span>
+            <span className="font-display text-[4cqmin] text-leaf-bright text-stroke">⭐ {score} puntos</span>
+            <span className="anim-float font-display text-[3cqmin] text-white text-stroke">Esperando a los demás… 🛶</span>
           </motion.div>
         </motion.div>
       )}

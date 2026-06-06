@@ -296,23 +296,23 @@ body {
     ),
     /* tono base de madera */
     linear-gradient(to bottom, var(--color-wood-light), var(--color-wood-rich) 55%, var(--color-wood-grain));
-  border: 0.6cqh solid var(--color-wood-edge);
+  border: 0.6cqmin solid var(--color-wood-edge);
   box-shadow:
-    inset 0 0.5cqh 0 rgba(255, 240, 200, 0.45),
-    inset 0 -0.9cqh 1.4cqh rgba(40, 20, 5, 0.55),
-    inset 0 0 0 0.25cqh rgba(120, 70, 25, 0.6),
-    0 1.1cqh 0 var(--color-wood-deep),
-    0 2.2cqh 3cqh rgba(0, 0, 0, 0.45);
+    inset 0 0.5cqmin 0 rgba(255, 240, 200, 0.45),
+    inset 0 -0.9cqmin 1.4cqmin rgba(40, 20, 5, 0.55),
+    inset 0 0 0 0.25cqmin rgba(120, 70, 25, 0.6),
+    0 1.1cqmin 0 var(--color-wood-deep),
+    0 2.2cqmin 3cqmin rgba(0, 0, 0, 0.45);
 }
 
 /* Variante hundida/tallada hacia DENTRO (rieles, marcos de contador) */
 .wood-inset {
   background-image: linear-gradient(to bottom, var(--color-wood-grain), var(--color-wood-deep));
-  border: 0.4cqh solid var(--color-wood-edge);
+  border: 0.4cqmin solid var(--color-wood-edge);
   box-shadow:
-    inset 0 0.8cqh 1.2cqh rgba(0, 0, 0, 0.6),
-    inset 0 -0.3cqh 0 rgba(255, 220, 160, 0.25),
-    0 0.2cqh 0 rgba(255, 230, 180, 0.25);
+    inset 0 0.8cqmin 1.2cqmin rgba(0, 0, 0, 0.6),
+    inset 0 -0.3cqmin 0 rgba(255, 220, 160, 0.25),
+    0 0.2cqmin 0 rgba(255, 230, 180, 0.25);
 }
 
 /* --- Pergamino antiguo --- */
@@ -325,8 +325,8 @@ body {
     radial-gradient(circle at 82% 70%, rgba(150, 100, 40, 0.18), transparent 30%),
     linear-gradient(to bottom, var(--color-parchment), var(--color-parchment-mid));
   box-shadow:
-    inset 0 0 6cqh rgba(120, 80, 25, 0.35),
-    inset 0 0 0 0.4cqh rgba(205, 168, 97, 0.7);
+    inset 0 0 6cqmin rgba(120, 80, 25, 0.35),
+    inset 0 0 0 0.4cqmin rgba(205, 168, 97, 0.7);
 }
 
 /* --- Texto dorado brillante con relieve --- */
@@ -335,16 +335,16 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 0.5cqh rgba(80, 45, 5, 0.85);
+  -webkit-text-stroke: 0.5cqmin rgba(80, 45, 5, 0.85);
   paint-order: stroke fill;
-  filter: drop-shadow(0 0.4cqh 0 rgba(120, 70, 10, 0.6));
+  filter: drop-shadow(0 0.4cqmin 0 rgba(120, 70, 10, 0.6));
 }
 
 /* Brillo glossy reutilizable (capa superior fija) */
 .gloss::after {
   content: '';
   position: absolute;
-  inset: 0.4cqh 0.6cqh auto 0.6cqh;
+  inset: 0.4cqmin 0.6cqmin auto 0.6cqmin;
   height: 38%;
   border-radius: 9999px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));

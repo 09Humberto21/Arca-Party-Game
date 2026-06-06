@@ -21,16 +21,16 @@ export default function PauseOverlay() {
 
       {/* Panel de madera */}
       <motion.div
-        className="wood-3d relative z-10 flex flex-col items-center gap-[2.2cqh] rounded-[3cqh] px-[7cqw] py-[4.5cqh]"
+        className="wood-3d relative z-10 flex flex-col items-center gap-[2.2cqmin] rounded-[3cqmin] px-[7cqw] py-[4.5cqmin]"
         initial={{ scale: 0.6, y: 30 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.7, opacity: 0 }}
         transition={{ type: 'spring', stiffness: 240, damping: 18 }}
       >
-        <div className="anim-float gpu text-[8cqh]">⏸️</div>
-        <h2 className="gold-text font-display text-[6cqh]">PAUSA</h2>
+        <div className="anim-float gpu text-[8cqmin]">⏸️</div>
+        <h2 className="gold-text font-display text-[6cqmin]">PAUSA</h2>
 
-        <div className="mt-[0.5cqh] flex flex-col items-center gap-[1.4cqh]">
+        <div className="mt-[0.5cqmin] flex flex-col items-center gap-[1.4cqmin]">
           <WoodButton size="lg" variant="leaf" glow onClick={togglePause}>
             ▶️ Reanudar
           </WoodButton>

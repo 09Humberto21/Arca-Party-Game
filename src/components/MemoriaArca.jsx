@@ -30,7 +30,7 @@ function buildConfig(level) {
   const deck = shuffle(animals.concat(animals)).map((emoji, i) => ({ key: i, emoji }))
   const cols = Math.min(6, Math.ceil(Math.sqrt(deck.length * 1.6)))
   const rows = Math.ceil(deck.length / cols)
-  const size = Math.min(15, Math.floor(62 / rows)) // cqh por carta
+  const size = Math.min(15, Math.floor(62 / rows)) // cqmin por carta
   return { pairs, time, deck, cols, size }
 }
 
@@ -121,13 +121,13 @@ export default function MemoriaArca({ onWin, onLose, onCorrect }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Encabezado */}
-      <div className="absolute inset-x-0 top-[11cqh] z-20 flex flex-col items-center gap-[1.2cqh]">
-        <div className="wood-3d rounded-[1.6cqh] px-[3cqw] py-[0.7cqh] font-display text-[2.4cqh] text-white text-stroke">
+      <div className="absolute inset-x-0 top-[11cqmin] z-20 flex flex-col items-center gap-[1.2cqmin]">
+        <div className="wood-3d rounded-[1.6cqmin] px-[3cqw] py-[0.7cqmin] font-display text-[2.4cqmin] text-white text-stroke">
           🧠 Nivel {level} · {matched.length}/{config.pairs} parejas
         </div>
         <div className="flex items-center gap-[1.2cqw]">
-          <span className="text-[3.4cqh]">⏰</span>
-          <div className="wood-inset h-[2.6cqh] w-[30cqw] overflow-hidden rounded-full">
+          <span className="text-[3.4cqmin]">⏰</span>
+          <div className="wood-inset h-[2.6cqmin] w-[30cqw] overflow-hidden rounded-full">
             <motion.div
               className="h-full rounded-full"
               animate={{ width: `${pct}%` }}
@@ -135,17 +135,17 @@ export default function MemoriaArca({ onWin, onLose, onCorrect }) {
               style={{ background: danger ? 'var(--color-coral)' : 'var(--color-leaf-bright)' }}
             />
           </div>
-          <span className="font-display text-[3cqh] tabular-nums text-stroke" style={{ color: danger ? '#ff5252' : '#fff' }}>
+          <span className="font-display text-[3cqmin] tabular-nums text-stroke" style={{ color: danger ? '#ff5252' : '#fff' }}>
             {timeLeft}s
           </span>
         </div>
       </div>
 
       {/* Tablero de cartas */}
-      <div className="absolute inset-x-0 top-[24cqh] z-10 flex justify-center px-[2cqw]">
+      <div className="absolute inset-x-0 top-[24cqmin] z-10 flex justify-center px-[2cqw]">
         <div
           className="grid"
-          style={{ gridTemplateColumns: `repeat(${config.cols}, ${config.size}cqh)`, gap: `${Math.max(1, config.size * 0.12)}cqh` }}
+          style={{ gridTemplateColumns: `repeat(${config.cols}, ${config.size}cqmin)`, gap: `${Math.max(1, config.size * 0.12)}cqmin` }}
         >
           {config.deck.map((card) => {
             const up = flipped.includes(card.key) || matched.includes(card.emoji)
@@ -157,20 +157,20 @@ export default function MemoriaArca({ onWin, onLose, onCorrect }) {
                 whileTap={{ scale: 0.92 }}
                 animate={{ rotateY: up ? 180 : 0, opacity: done ? 0.75 : 1 }}
                 transition={{ type: 'spring', stiffness: 320, damping: 20 }}
-                className="gpu relative flex items-center justify-center rounded-[1.4cqh]"
-                style={{ width: `${config.size}cqh`, height: `${config.size}cqh`, transformStyle: 'preserve-3d' }}
+                className="gpu relative flex items-center justify-center rounded-[1.4cqmin]"
+                style={{ width: `${config.size}cqmin`, height: `${config.size}cqmin`, transformStyle: 'preserve-3d' }}
               >
                 {/* Reverso (madera) */}
                 <span
-                  className="wood-3d absolute inset-0 flex items-center justify-center rounded-[1.4cqh] text-[3.4cqh]"
+                  className="wood-3d absolute inset-0 flex items-center justify-center rounded-[1.4cqmin] text-[3.4cqmin]"
                   style={{ backfaceVisibility: 'hidden' }}
                 >
                   ⚓
                 </span>
                 {/* Frente (animal) */}
                 <span
-                  className="parchment absolute inset-0 flex items-center justify-center rounded-[1.4cqh]"
-                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', fontSize: `${config.size * 0.55}cqh` }}
+                  className="parchment absolute inset-0 flex items-center justify-center rounded-[1.4cqmin]"
+                  style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', fontSize: `${config.size * 0.55}cqmin` }}
                 >
                   {card.emoji}
                 </span>
@@ -199,12 +199,12 @@ function ResultOverlay({ won, onReplay }) {
     >
       <div className="absolute inset-0 bg-black/55" />
       <motion.div
-        className="parchment relative z-10 flex flex-col items-center gap-[1.4cqh] rounded-[2.4cqh] px-[6cqw] py-[3cqh]"
+        className="parchment relative z-10 flex flex-col items-center gap-[1.4cqmin] rounded-[2.4cqmin] px-[6cqw] py-[3cqmin]"
         initial={{ scale: 0.7, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 260, damping: 16 }}
       >
-        <span className="gold-text font-display text-[6cqh] text-stroke-lg">{won ? '🎉 ¡Genial!' : '⏰ ¡Tiempo!'}</span>
+        <span className="gold-text font-display text-[6cqmin] text-stroke-lg">{won ? '🎉 ¡Genial!' : '⏰ ¡Tiempo!'}</span>
         <WoodButton size="md" variant="leaf" glow onClick={onReplay}>
           🔁 Jugar de nuevo
         </WoodButton>

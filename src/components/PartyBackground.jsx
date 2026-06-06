@@ -46,7 +46,7 @@ export default function PartyBackground({ children, lite = false }) {
       {/* Rayos de sol (giran solo en modo completo) */}
       <div
         aria-hidden
-        className={`${lite ? '' : 'anim-spin-slow'} gpu absolute left-1/2 top-[26%] h-[140cqh] w-[140cqh] -translate-x-1/2 -translate-y-1/2 opacity-40`}
+        className={`${lite ? '' : 'anim-spin-slow'} gpu absolute left-1/2 top-[26%] h-[140cqmin] w-[140cqmin] -translate-x-1/2 -translate-y-1/2 opacity-40`}
         style={{
           background: `repeating-conic-gradient(from 0deg, ${SUNBURST} 0deg 9deg, transparent 9deg 18deg)`,
           maskImage: 'radial-gradient(circle, #000 30%, transparent 68%)',
@@ -56,7 +56,7 @@ export default function PartyBackground({ children, lite = false }) {
       {/* Halo del sol (estático) */}
       <div
         aria-hidden
-        className="absolute left-1/2 top-[26%] h-[42cqh] w-[42cqh] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70"
+        className="absolute left-1/2 top-[26%] h-[42cqmin] w-[42cqmin] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70"
         style={{ background: 'radial-gradient(circle, rgba(255,236,168,0.95) 0%, rgba(255,210,120,0.5) 45%, transparent 70%)' }}
       />
 
@@ -75,16 +75,16 @@ export default function PartyBackground({ children, lite = false }) {
 
           {/* Banderines */}
           <div aria-hidden className="absolute inset-x-0 top-0 z-10">
-            <div className="anim-sway flex justify-center gap-[0.6cqw] pt-[1cqh]">
+            <div className="anim-sway flex justify-center gap-[0.6cqw] pt-[1cqmin]">
               {Array.from({ length: 16 }).map((_, i) => (
                 <span
                   key={`flag-${i}`}
-                  className="block h-[3.4cqh] w-[2.4cqw]"
+                  className="block h-[3.4cqmin] w-[2.4cqw]"
                   style={{ background: BUNTING[i % BUNTING.length], clipPath: 'polygon(0 0, 100% 0, 50% 100%)', animationDelay: `${i * 0.05}s` }}
                 />
               ))}
             </div>
-            <div className="absolute top-[1cqh] h-[2px] w-full bg-black/25" />
+            <div className="absolute top-[1cqmin] h-[2px] w-full bg-black/25" />
           </div>
 
           {/* Globos */}
@@ -92,7 +92,7 @@ export default function PartyBackground({ children, lite = false }) {
             <span
               key={`bl-${i}`}
               aria-hidden
-              className="gpu absolute bottom-0 text-[6cqh]"
+              className="gpu absolute bottom-0 text-[6cqmin]"
               style={{ left: `${b.left}%`, ['--drift']: `${b.drift}px`, animation: `balloon-rise ${b.dur}s linear ${b.delay}s infinite` }}
             >
               {b.emoji}
@@ -105,18 +105,18 @@ export default function PartyBackground({ children, lite = false }) {
               key={`cf-${i}`}
               aria-hidden
               className="absolute top-0"
-              style={{ left: `${c.left}%`, width: '0.9cqw', height: '1.4cqh', background: c.color, borderRadius: c.round ? '50%' : '2px', ['--drift']: `${c.drift}px`, animation: `confetti-fall ${c.dur}s linear ${c.delay}s infinite` }}
+              style={{ left: `${c.left}%`, width: '0.9cqw', height: '1.4cqmin', background: c.color, borderRadius: c.round ? '50%' : '2px', ['--drift']: `${c.drift}px`, animation: `confetti-fall ${c.dur}s linear ${c.delay}s infinite` }}
             />
           ))}
         </>
       )}
 
       {/* Mar (olas se mueven solo en modo completo) */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-[34cqh]">
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-[34cqmin]">
         <div className="absolute inset-0 bg-gradient-to-b from-ocean-light to-ocean-deep" />
-        <WaveLayer color="rgba(0,100,177,0.45)" dur={11} bottom={'8cqh'} height={'14cqh'} animate={!lite} />
-        <WaveLayer color="rgba(86,204,242,0.6)" dur={8} bottom={'4cqh'} height={'13cqh'} animate={!lite} />
-        <WaveLayer color="var(--color-foam)" dur={6} bottom={'0'} height={'10cqh'} animate={!lite} />
+        <WaveLayer color="rgba(0,100,177,0.45)" dur={11} bottom={'8cqmin'} height={'14cqmin'} animate={!lite} />
+        <WaveLayer color="rgba(86,204,242,0.6)" dur={8} bottom={'4cqmin'} height={'13cqmin'} animate={!lite} />
+        <WaveLayer color="var(--color-foam)" dur={6} bottom={'0'} height={'10cqmin'} animate={!lite} />
         <div className="absolute inset-x-0 top-0 h-[2px] bg-white/60" />
       </div>
 

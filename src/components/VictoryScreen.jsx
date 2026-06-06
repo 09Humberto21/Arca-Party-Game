@@ -39,8 +39,8 @@ export default function VictoryScreen() {
         aria-hidden
         className="absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2"
         style={{
-          width: '120cqh',
-          height: '120cqh',
+          width: '120cqmin',
+          height: '120cqmin',
           borderRadius: '50%',
           background:
             'conic-gradient(from 180deg at 50% 50%, transparent 0deg, transparent 200deg, #ff5e7e 205deg, #ff9f43 215deg, #ffd700 225deg, #38e08a 235deg, #2be6d6 245deg, #2e8bff 255deg, #b06bff 265deg, transparent 270deg, transparent 360deg)',
@@ -59,7 +59,7 @@ export default function VictoryScreen() {
           style={{
             left: `${c.left}%`,
             width: '0.9cqw',
-            height: '1.5cqh',
+            height: '1.5cqmin',
             background: c.color,
             borderRadius: c.round ? '50%' : '2px',
             ['--drift']: `${c.drift}px`,
@@ -70,14 +70,14 @@ export default function VictoryScreen() {
 
       {/* Paloma + arca */}
       <motion.div
-        className="absolute left-[18%] top-[26%] text-[10cqh]"
+        className="absolute left-[18%] top-[26%] text-[10cqmin]"
         animate={{ y: [0, -16, 0], x: [0, 10, 0], rotate: [-6, 6, -6] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       >
         🕊️
       </motion.div>
       <motion.div
-        className="absolute right-[16%] top-[30%] text-[8cqh]"
+        className="absolute right-[16%] top-[30%] text-[8cqmin]"
         animate={{ y: [0, -12, 0] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
@@ -85,9 +85,9 @@ export default function VictoryScreen() {
       </motion.div>
 
       {/* Contenido */}
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-[2cqh] px-[6cqw]">
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-[2cqmin] px-[6cqw]">
         <motion.div
-          className="anim-bob gpu text-[14cqh] drop-shadow-[0_8px_0_rgba(0,0,0,0.2)]"
+          className="anim-bob gpu text-[14cqmin] drop-shadow-[0_8px_0_rgba(0,0,0,0.2)]"
           initial={{ scale: 0, rotate: -30 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 200, damping: 12 }}
@@ -96,7 +96,7 @@ export default function VictoryScreen() {
         </motion.div>
 
         <motion.h1
-          className="gold-text font-display text-stroke-lg text-[10cqh] leading-none"
+          className="gold-text font-display text-stroke-lg text-[10cqmin] leading-none"
           initial={{ scale: 0.4, opacity: 0, y: -30 }}
           animate={{ scale: 1, opacity: 1, y: 0, rotate: [-2, 2, -2] }}
           transition={{ scale: { type: 'spring', stiffness: 220, damping: 12 }, rotate: { duration: 2.5, repeat: Infinity } }}
@@ -104,7 +104,7 @@ export default function VictoryScreen() {
           ¡VICTORIA!
         </motion.h1>
         <motion.p
-          className="font-display text-[4cqh] text-white text-stroke-lg"
+          className="font-display text-[4cqmin] text-white text-stroke-lg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -124,7 +124,7 @@ export default function VictoryScreen() {
         </motion.div>
 
         <motion.div
-          className="mt-[1cqh] flex items-center gap-[2cqw]"
+          className="mt-[1cqmin] flex items-center gap-[2cqw]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
@@ -143,9 +143,9 @@ export default function VictoryScreen() {
 
 function Stat({ emoji, value, color }) {
   return (
-    <div className="wood-3d flex items-center gap-[1cqw] rounded-full px-[2.2cqw] py-[1cqh]">
-      <span className="text-[4cqh]">{emoji}</span>
-      <span className="font-display text-[4cqh] tabular-nums" style={{ color, textShadow: '0 0.3cqh 0 rgba(0,0,0,0.5)' }}>
+    <div className="wood-3d flex items-center gap-[1cqw] rounded-full px-[2.2cqw] py-[1cqmin]">
+      <span className="text-[4cqmin]">{emoji}</span>
+      <span className="font-display text-[4cqmin] tabular-nums" style={{ color, textShadow: '0 0.3cqmin 0 rgba(0,0,0,0.5)' }}>
         {value.toLocaleString('es')}
       </span>
     </div>

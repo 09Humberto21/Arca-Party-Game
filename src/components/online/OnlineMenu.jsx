@@ -51,9 +51,9 @@ export default function OnlineMenu() {
 
   return (
     <PartyBackground>
-      <div className="relative flex h-full w-full flex-col items-center justify-center gap-[2cqh] px-[5cqw] py-[3cqh]">
+      <div className="relative flex h-full w-full flex-col items-center justify-center gap-[2cqmin] px-[5cqw] py-[3cqmin]">
         <motion.h1
-          className="gold-text font-display text-[8cqh] text-stroke-lg"
+          className="gold-text font-display text-[8cqmin] text-stroke-lg"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 200, damping: 14 }}
@@ -63,26 +63,26 @@ export default function OnlineMenu() {
 
         {/* Panel de madera */}
         <motion.div
-          className="wood-3d flex w-full max-w-[70cqw] flex-col items-center gap-[1.6cqh] rounded-[2.4cqh] px-[4cqw] py-[2.6cqh]"
+          className="wood-3d flex w-full max-w-[70cqw] flex-col items-center gap-[1.6cqmin] rounded-[2.4cqmin] px-[4cqw] py-[2.6cqmin]"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1, type: 'spring', stiffness: 200, damping: 16 }}
         >
           {/* Apodo */}
-          <label className="flex w-full flex-col items-center gap-[0.6cqh]">
-            <span className="font-display text-[2.6cqh] text-white text-stroke">Tu apodo</span>
+          <label className="flex w-full flex-col items-center gap-[0.6cqmin]">
+            <span className="font-display text-[2.6cqmin] text-white text-stroke">Tu apodo</span>
             <input
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
               maxLength={16}
               placeholder="Invitado"
-              className="parchment w-full rounded-[1.4cqh] px-[2cqw] py-[1cqh] text-center font-display text-[3cqh] text-wood-dark outline-none"
+              className="parchment w-full rounded-[1.4cqmin] px-[2cqw] py-[1cqmin] text-center font-display text-[3cqmin] text-wood-dark outline-none"
             />
           </label>
 
           {/* Selector de skin */}
-          <div className="flex w-full flex-col items-center gap-[0.6cqh]">
-            <span className="font-display text-[2.4cqh] text-white text-stroke">Tu personaje</span>
+          <div className="flex w-full flex-col items-center gap-[0.6cqmin]">
+            <span className="font-display text-[2.4cqmin] text-white text-stroke">Tu personaje</span>
             <div className="flex max-w-full flex-wrap justify-center gap-[0.8cqw]">
               {SKINS.map((s) => (
                 <motion.button
@@ -92,8 +92,8 @@ export default function OnlineMenu() {
                     playSound('click')
                   }}
                   whileTap={{ scale: 0.85 }}
-                  className={`flex h-[6cqh] w-[6cqh] items-center justify-center rounded-full text-[3.6cqh] ${
-                    skin === s ? 'ring-[0.5cqh] ring-gold' : 'opacity-70'
+                  className={`flex h-[6cqmin] w-[6cqmin] items-center justify-center rounded-full text-[3.6cqmin] ${
+                    skin === s ? 'ring-[0.5cqmin] ring-gold' : 'opacity-70'
                   }`}
                   style={{ background: skin === s ? 'radial-gradient(circle at 50% 35%, #ffeebb, #e0a85a)' : 'rgba(0,0,0,0.2)' }}
                 >
@@ -105,7 +105,7 @@ export default function OnlineMenu() {
 
           {/* Acciones */}
           {mode !== 'join' ? (
-            <div className="mt-[0.6cqh] flex flex-col items-center gap-[1.2cqh]">
+            <div className="mt-[0.6cqmin] flex flex-col items-center gap-[1.2cqmin]">
               <WoodButton size="lg" variant="leaf" glow onClick={doCreate} disabled={connecting}>
                 ➕ CREAR SALA
               </WoodButton>
@@ -114,12 +114,12 @@ export default function OnlineMenu() {
               </WoodButton>
             </div>
           ) : (
-            <div className="mt-[0.6cqh] flex flex-col items-center gap-[1.2cqh]">
+            <div className="mt-[0.6cqmin] flex flex-col items-center gap-[1.2cqmin]">
               <input
                 value={code}
                 onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4))}
                 placeholder="ABCD"
-                className="parchment w-[34cqw] rounded-[1.4cqh] px-[2cqw] py-[1cqh] text-center font-display text-[5cqh] tracking-[0.5em] text-wood-dark outline-none"
+                className="parchment w-[34cqw] rounded-[1.4cqmin] px-[2cqw] py-[1cqmin] text-center font-display text-[5cqmin] tracking-[0.5em] text-wood-dark outline-none"
               />
               <div className="flex items-center gap-[1.5cqw]">
                 <WoodButton size="md" variant="wood" onClick={() => setMode(null)} disabled={connecting}>
@@ -133,9 +133,9 @@ export default function OnlineMenu() {
           )}
 
           {/* Estado / error */}
-          {connecting && <p className="font-display text-[2.4cqh] text-white text-stroke">Conectando… 🛶</p>}
+          {connecting && <p className="font-display text-[2.4cqmin] text-white text-stroke">Conectando… 🛶</p>}
           {status === 'error' && (
-            <p className="font-display text-[2.2cqh] text-coral text-stroke">{errorText(error)}</p>
+            <p className="font-display text-[2.2cqmin] text-coral text-stroke">{errorText(error)}</p>
           )}
         </motion.div>
 

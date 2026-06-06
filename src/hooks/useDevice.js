@@ -26,3 +26,18 @@ export function useIsTouch() {
 
   return touch
 }
+
+export function useIsPortrait() {
+  const detect = () => (mq('(orientation: portrait)')?.matches ?? false)
+  const [portrait, setPortrait] = useState(detect)
+
+  useEffect(() => {
+    const m = mq('(orientation: portrait)')
+    if (!m) return
+    const on = () => setPortrait(detect())
+    m.addEventListener?.('change', on)
+    return () => m.removeEventListener?.('change', on)
+  }, [])
+
+  return portrait
+}

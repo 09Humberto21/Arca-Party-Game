@@ -29,31 +29,31 @@ export default function LobbyScreen() {
   }
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-between px-[4cqw] py-[3cqh]">
+    <div className="relative flex h-full w-full flex-col items-center justify-between px-[4cqw] py-[3cqmin]">
       {/* Código de sala para compartir */}
       <motion.div
-        className="flex flex-col items-center gap-[0.6cqh]"
+        className="flex flex-col items-center gap-[0.6cqmin]"
         initial={{ opacity: 0, y: -24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 200, damping: 14 }}
       >
-        <span className="font-display text-[2.6cqh] text-white text-stroke">Código de la sala</span>
+        <span className="font-display text-[2.6cqmin] text-white text-stroke">Código de la sala</span>
         <motion.button
           onClick={copyCode}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="wood-3d flex items-center gap-[1.5cqw] rounded-[2cqh] px-[4cqw] py-[1.2cqh]"
+          className="wood-3d flex items-center gap-[1.5cqw] rounded-[2cqmin] px-[4cqw] py-[1.2cqmin]"
         >
-          <span className="gold-text font-display text-[10cqh] tracking-[0.3em] text-stroke-lg">{code}</span>
-          <span className="text-[4cqh]">{copied ? '✅' : '📋'}</span>
+          <span className="gold-text font-display text-[10cqmin] tracking-[0.3em] text-stroke-lg">{code}</span>
+          <span className="text-[4cqmin]">{copied ? '✅' : '📋'}</span>
         </motion.button>
-        <span className="font-display text-[2cqh] text-white/80 text-stroke">
+        <span className="font-display text-[2cqmin] text-white/80 text-stroke">
           {copied ? '¡Copiado!' : 'Tócalo para copiar y compartir'}
         </span>
       </motion.div>
 
       {/* Jugadores */}
-      <div className="flex max-h-[42cqh] w-full flex-wrap items-start justify-center gap-[1.5cqw] overflow-y-auto py-[1cqh]">
+      <div className="flex max-h-[42cqmin] w-full flex-wrap items-start justify-center gap-[1.5cqw] overflow-y-auto py-[1cqmin]">
         <AnimatePresence>
           {players.map((p) => (
             <motion.div
@@ -63,23 +63,23 @@ export default function LobbyScreen() {
               animate={{ opacity: p.connected ? 1 : 0.4, scale: 1 }}
               exit={{ opacity: 0, scale: 0.6 }}
               transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-              className="wood-3d relative flex w-[18cqw] min-w-[20cqh] flex-col items-center gap-[0.4cqh] rounded-[2cqh] px-[1.5cqw] py-[1.4cqh]"
+              className="wood-3d relative flex w-[18cqw] min-w-[20cqmin] flex-col items-center gap-[0.4cqmin] rounded-[2cqmin] px-[1.5cqw] py-[1.4cqmin]"
             >
-              {p.isHost && <span className="absolute -top-[2.2cqh] text-[4cqh]">👑</span>}
+              {p.isHost && <span className="absolute -top-[2.2cqmin] text-[4cqmin]">👑</span>}
               <div
-                className="flex h-[9cqh] w-[9cqh] items-center justify-center rounded-full text-[5.5cqh]"
-                style={{ background: 'radial-gradient(circle at 50% 35%, #ffeebb, #e0a85a)', border: '0.4cqh solid var(--color-wood-edge)' }}
+                className="flex h-[9cqmin] w-[9cqmin] items-center justify-center rounded-full text-[5.5cqmin]"
+                style={{ background: 'radial-gradient(circle at 50% 35%, #ffeebb, #e0a85a)', border: '0.4cqmin solid var(--color-wood-edge)' }}
               >
                 {p.skin}
               </div>
-              <span className="max-w-full truncate font-display text-[2.6cqh] text-white text-stroke">
+              <span className="max-w-full truncate font-display text-[2.6cqmin] text-white text-stroke">
                 {p.nickname}
                 {p.id === me && ' (tú)'}
               </span>
               {p.isHost ? (
-                <span className="font-display text-[2cqh] text-gold text-stroke">Anfitrión</span>
+                <span className="font-display text-[2cqmin] text-gold text-stroke">Anfitrión</span>
               ) : (
-                <span className={`font-display text-[2.2cqh] text-stroke ${p.ready ? 'text-leaf-bright' : 'text-white/60'}`}>
+                <span className={`font-display text-[2.2cqmin] text-stroke ${p.ready ? 'text-leaf-bright' : 'text-white/60'}`}>
                   {p.ready ? '✓ Listo' : 'Esperando…'}
                 </span>
               )}
@@ -89,10 +89,10 @@ export default function LobbyScreen() {
       </div>
 
       {/* Controles */}
-      <div className="flex flex-col items-center gap-[1.2cqh]">
+      <div className="flex flex-col items-center gap-[1.2cqmin]">
         {isHost && (
           <div className="flex items-center gap-[1.5cqw]">
-            <span className="font-display text-[2.4cqh] text-white text-stroke">Rondas:</span>
+            <span className="font-display text-[2.4cqmin] text-white text-stroke">Rondas:</span>
             {[3, 4, 6].map((n) => (
               <motion.button
                 key={n}
@@ -101,8 +101,8 @@ export default function LobbyScreen() {
                   playSound('click')
                 }}
                 whileTap={{ scale: 0.9 }}
-                className={`wood-3d flex h-[6cqh] w-[6cqh] items-center justify-center rounded-[1.2cqh] font-display text-[3cqh] text-white text-stroke ${
-                  totalRounds === n ? 'ring-[0.5cqh] ring-gold' : 'opacity-70'
+                className={`wood-3d flex h-[6cqmin] w-[6cqmin] items-center justify-center rounded-[1.2cqmin] font-display text-[3cqmin] text-white text-stroke ${
+                  totalRounds === n ? 'ring-[0.5cqmin] ring-gold' : 'opacity-70'
                 }`}
               >
                 {n}
@@ -130,7 +130,7 @@ export default function LobbyScreen() {
         )}
 
         {isHost && !everyoneReady && players.length > 1 && (
-          <span className="font-display text-[2cqh] text-white/70 text-stroke">Puedes empezar cuando quieras 😉</span>
+          <span className="font-display text-[2cqmin] text-white/70 text-stroke">Puedes empezar cuando quieras 😉</span>
         )}
       </div>
     </div>

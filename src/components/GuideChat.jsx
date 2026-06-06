@@ -118,7 +118,7 @@ export default function GuideChat() {
         whileHover={{ scale: 1.12 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Guía del juego"
-        className="wood-3d gpu absolute bottom-[2cqh] right-[1.5cqw] z-[60] flex h-[7cqh] w-[7cqh] items-center justify-center rounded-full !border-[0.4cqh] text-[3.4cqh]"
+        className="wood-3d gpu absolute bottom-[2cqmin] right-[1.5cqw] z-[60] flex h-[7cqmin] w-[7cqmin] items-center justify-center rounded-full !border-[0.4cqmin] text-[3.4cqmin]"
       >
         🕊️
       </motion.button>
@@ -135,33 +135,33 @@ export default function GuideChat() {
 
             {/* Ventana del chat */}
             <motion.div
-              className="relative z-10 flex w-[72cqw] max-w-[120cqh] flex-col overflow-hidden rounded-[2.4cqh]"
-              style={{ height: '78cqh' }}
+              className="relative z-10 flex w-[72cqw] max-w-[120cqmin] flex-col overflow-hidden rounded-[2.4cqmin]"
+              style={{ height: '78cqmin' }}
               initial={{ scale: 0.7, y: 30, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 240, damping: 20 }}
             >
               {/* Cabecera de madera */}
-              <div className="wood-3d flex shrink-0 items-center gap-[1.5cqw] rounded-b-none px-[2.5cqw] py-[1.4cqh]">
-                <span className="anim-float gpu text-[5cqh]">🕊️</span>
+              <div className="wood-3d flex shrink-0 items-center gap-[1.5cqw] rounded-b-none px-[2.5cqw] py-[1.4cqmin]">
+                <span className="anim-float gpu text-[5cqmin]">🕊️</span>
                 <div className="flex flex-col leading-tight">
-                  <span className="gold-text font-display text-[3.2cqh]">Coo, tu guía</span>
-                  <span className="font-body text-[1.8cqh] font-bold text-[#fff0d2]">Te explico el Arca Party</span>
+                  <span className="gold-text font-display text-[3.2cqmin]">Coo, tu guía</span>
+                  <span className="font-body text-[1.8cqmin] font-bold text-[#fff0d2]">Te explico el Arca Party</span>
                 </div>
                 <div className="ml-auto flex items-center gap-[0.8cqw]">
-                  <button onClick={reset} aria-label="Reiniciar" className="wood-inset flex h-[5cqh] w-[5cqh] items-center justify-center rounded-full text-[2.4cqh] text-white">
+                  <button onClick={reset} aria-label="Reiniciar" className="wood-inset flex h-[5cqmin] w-[5cqmin] items-center justify-center rounded-full text-[2.4cqmin] text-white">
                     🔄
                   </button>
-                  <button onClick={() => setOpen(false)} aria-label="Cerrar" className="wood-inset flex h-[5cqh] w-[5cqh] items-center justify-center rounded-full text-[2.4cqh] text-white">
+                  <button onClick={() => setOpen(false)} aria-label="Cerrar" className="wood-inset flex h-[5cqmin] w-[5cqmin] items-center justify-center rounded-full text-[2.4cqmin] text-white">
                     ✕
                   </button>
                 </div>
               </div>
 
               {/* Mensajes (pergamino) */}
-              <div ref={scrollRef} className="parchment min-h-0 flex-1 overflow-y-auto px-[3cqw] py-[2cqh]">
-                <div className="flex flex-col gap-[1.4cqh]">
+              <div ref={scrollRef} className="parchment min-h-0 flex-1 overflow-y-auto px-[3cqw] py-[2cqmin]">
+                <div className="flex flex-col gap-[1.4cqmin]">
                   {messages.map((msg, i) => (
                     <Bubble key={i} from={msg.from} text={msg.text} />
                   ))}
@@ -169,14 +169,14 @@ export default function GuideChat() {
               </div>
 
               {/* Opciones (respuestas rápidas) */}
-              <div className="wood-3d flex shrink-0 flex-wrap justify-center gap-[1cqw] rounded-t-none px-[2.5cqw] py-[1.6cqh]">
+              <div className="wood-3d flex shrink-0 flex-wrap justify-center gap-[1cqw] rounded-t-none px-[2.5cqw] py-[1.6cqmin]">
                 {options.map((opt) => (
                   <motion.button
                     key={opt.id}
                     onClick={() => choose(opt)}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.94 }}
-                    className="gpu rounded-[1.6cqh] border-[0.35cqh] border-white/70 bg-gradient-to-b from-gold to-gold-deep px-[2cqw] py-[0.9cqh] font-display text-[2.2cqh] text-wood-dark text-stroke"
+                    className="gpu rounded-[1.6cqmin] border-[0.35cqmin] border-white/70 bg-gradient-to-b from-gold to-gold-deep px-[2cqw] py-[0.9cqmin] font-display text-[2.2cqmin] text-wood-dark text-stroke"
                     style={{ boxShadow: '0 4px 0 var(--color-gold-deep)' }}
                   >
                     {opt.label}
@@ -201,11 +201,11 @@ function Bubble({ from, text }) {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <div
-        className="max-w-[78%] rounded-[1.8cqh] px-[2cqw] py-[1.2cqh] font-body text-[2.2cqh] font-semibold leading-snug"
+        className="max-w-[78%] rounded-[1.8cqmin] px-[2cqw] py-[1.2cqmin] font-body text-[2.2cqmin] font-semibold leading-snug"
         style={
           isGuide
-            ? { background: 'linear-gradient(to bottom, #fffdf3, #f3e3b8)', color: '#5b3d12', border: '0.3cqh solid #cda861', borderBottomLeftRadius: '0.4cqh' }
-            : { background: 'linear-gradient(to bottom, var(--color-ocean-light), var(--color-ocean))', color: '#fff', border: '0.3cqh solid var(--color-ocean-deep)', borderBottomRightRadius: '0.4cqh' }
+            ? { background: 'linear-gradient(to bottom, #fffdf3, #f3e3b8)', color: '#5b3d12', border: '0.3cqmin solid #cda861', borderBottomLeftRadius: '0.4cqmin' }
+            : { background: 'linear-gradient(to bottom, var(--color-ocean-light), var(--color-ocean))', color: '#fff', border: '0.3cqmin solid var(--color-ocean-deep)', borderBottomRightRadius: '0.4cqmin' }
         }
       >
         {isGuide && <span className="mr-[0.6cqw]">🕊️</span>}
