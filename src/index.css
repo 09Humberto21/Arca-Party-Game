@@ -1,0 +1,412 @@
+@import 'tailwindcss';
+
+/* ===================================================================
+   ARCA PARTY — Theme Tokens (Tailwind v4 @theme)
+   Paleta FIESTA estilo "Mario Party": vibrante, brillante, festiva.
+   =================================================================== */
+@theme {
+  /* Océano */
+  --color-ocean: #00a8ff;
+  --color-ocean-deep: #0064b1;
+  --color-ocean-light: #56ccf2;
+  --color-foam: #eafdff;
+
+  /* Cielo de fiesta */
+  --color-sky-top: #7b2ff7;
+  --color-sky-mid: #2e8bff;
+  --color-sky-low: #59d0ff;
+
+  /* Madera cálida */
+  --color-wood: #f39c12;
+  --color-wood-dark: #b9700a;
+  --color-wood-light: #ffc24b;
+
+  /* Oro brillante (botones) */
+  --color-gold: #ffd700;
+  --color-gold-deep: #f5a800;
+
+  /* Madera tallada RICA (HUD / paneles 3D) */
+  --color-wood-rich: #b5651d;
+  --color-wood-grain: #8a4a14;
+  --color-wood-deep: #5e3210;
+  --color-wood-edge: #3e2008;
+
+  /* Pergamino antiguo */
+  --color-parchment: #f6e7bd;
+  --color-parchment-mid: #ecd29a;
+  --color-parchment-edge: #cda861;
+
+  /* Recursos del juego */
+  --color-leaf-bright: #00e676; /* barra de progreso */
+  --color-coin: #fbc02d; /* monedas */
+  --color-diamond: #03a9f4; /* diamantes */
+
+  /* Acentos de confeti / fiesta */
+  --color-coral: #ff5e7e;
+  --color-leaf: #38e08a;
+  --color-grape: #b06bff;
+  --color-tangerine: #ff9f43;
+  --color-aqua: #2be6d6;
+
+  /* Tipografías */
+  --font-display: 'Fredoka One', 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Baloo 2', system-ui, sans-serif;
+}
+
+/* ===================================================================
+   Base
+   =================================================================== */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  user-select: none;
+  background: #0a0a1a;
+  /* Hint para que el navegador no haga subpixel snapping raro */
+  text-rendering: optimizeSpeed;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Borde de texto "cómic" — pintado una sola vez, no anima nada caro */
+.text-stroke {
+  -webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+  paint-order: stroke fill;
+}
+.text-stroke-lg {
+  -webkit-text-stroke: 4px rgba(0, 0, 0, 0.55);
+  paint-order: stroke fill;
+}
+
+/* Promueve a capa propia: clave para que las animaciones de transform
+   corran en el compositor (GPU) y no bloqueen el hilo principal. */
+.gpu {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ===================================================================
+   ANIMACIONES — solo transform/opacity (compositor-friendly).
+   Nada de blur/filter/background-position en bucle: eso causaba el lag.
+   =================================================================== */
+
+/* Flotar vertical suave */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+/* Bamboleo de barca: sube/baja + ladea */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-2.5deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(2.5deg);
+  }
+}
+
+/* Balanceo (banderines, carteles) */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+/* Rayos de sol girando detrás del título (muy Mario Party) */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Latido / pop del botón principal */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+/* Confeti cayendo (translate + rotate, GPU) */
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift, 20px), 110vh, 0) rotate(720deg);
+    opacity: 1;
+  }
+}
+
+/* Globos subiendo */
+@keyframes balloon-rise {
+  0% {
+    transform: translate3d(0, 115vh, 0) rotate(-4deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), -25vh, 0) rotate(4deg);
+  }
+}
+
+/* Destello / estrella titilando (opacity+scale, barato) */
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Olas desplazándose horizontalmente (transform, no background-position) */
+@keyframes wave-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Brillo "sheen" que cruza un botón — sin blur, solo transform/opacity */
+@keyframes sheen-x {
+  0% {
+    transform: translateX(-160%) skewX(-18deg);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(260%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* Entrada con rebote */
+@keyframes pop-in {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Letras del título saltando en cascada */
+@keyframes letter-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-18px) rotate(var(--rot, 0deg));
+  }
+}
+
+/* ---- Clases utilitarias de animación ---- */
+.anim-float {
+  animation: float-y 3.2s ease-in-out infinite;
+}
+.anim-bob {
+  animation: bob 3.4s ease-in-out infinite;
+}
+.anim-sway {
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: top center;
+}
+.anim-spin-slow {
+  animation: spin-slow 26s linear infinite;
+}
+.anim-heartbeat {
+  animation: heartbeat 1.3s ease-in-out infinite;
+}
+.anim-twinkle {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+.anim-pop {
+  animation: pop-in 0.5s cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+
+/* ===================================================================
+   TEXTURAS — Dirección de Arte
+   Madera tallada 3D, pergamino antiguo, vetas, brillos.
+   Sombras/gradientes ESTÁTICOS (se pintan una vez) → no afectan fps.
+   =================================================================== */
+
+/* --- Madera tallada con relieve (paneles del HUD, botones) --- */
+.wood-3d {
+  background-color: var(--color-wood-rich);
+  background-image:
+    /* luz cenital */
+    linear-gradient(
+      to bottom,
+      rgba(255, 230, 170, 0.55),
+      rgba(255, 200, 110, 0) 32%,
+      rgba(0, 0, 0, 0.12) 75%,
+      rgba(0, 0, 0, 0.35)
+    ),
+    /* vetas verticales sutiles */
+    repeating-linear-gradient(
+      90deg,
+      rgba(60, 30, 8, 0.16) 0px,
+      rgba(60, 30, 8, 0.16) 2px,
+      rgba(255, 220, 150, 0.06) 5px,
+      rgba(60, 30, 8, 0) 11px
+    ),
+    /* tono base de madera */
+    linear-gradient(to bottom, var(--color-wood-light), var(--color-wood-rich) 55%, var(--color-wood-grain));
+  border: 0.6cqh solid var(--color-wood-edge);
+  box-shadow:
+    inset 0 0.5cqh 0 rgba(255, 240, 200, 0.45),
+    inset 0 -0.9cqh 1.4cqh rgba(40, 20, 5, 0.55),
+    inset 0 0 0 0.25cqh rgba(120, 70, 25, 0.6),
+    0 1.1cqh 0 var(--color-wood-deep),
+    0 2.2cqh 3cqh rgba(0, 0, 0, 0.45);
+}
+
+/* Variante hundida/tallada hacia DENTRO (rieles, marcos de contador) */
+.wood-inset {
+  background-image: linear-gradient(to bottom, var(--color-wood-grain), var(--color-wood-deep));
+  border: 0.4cqh solid var(--color-wood-edge);
+  box-shadow:
+    inset 0 0.8cqh 1.2cqh rgba(0, 0, 0, 0.6),
+    inset 0 -0.3cqh 0 rgba(255, 220, 160, 0.25),
+    0 0.2cqh 0 rgba(255, 230, 180, 0.25);
+}
+
+/* --- Pergamino antiguo --- */
+.parchment {
+  background-color: var(--color-parchment);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 235, 0.8), rgba(255, 255, 235, 0) 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(120, 80, 25, 0.35), rgba(120, 80, 25, 0) 55%),
+    radial-gradient(circle at 18% 30%, rgba(150, 100, 40, 0.18), transparent 30%),
+    radial-gradient(circle at 82% 70%, rgba(150, 100, 40, 0.18), transparent 30%),
+    linear-gradient(to bottom, var(--color-parchment), var(--color-parchment-mid));
+  box-shadow:
+    inset 0 0 6cqh rgba(120, 80, 25, 0.35),
+    inset 0 0 0 0.4cqh rgba(205, 168, 97, 0.7);
+}
+
+/* --- Texto dorado brillante con relieve --- */
+.gold-text {
+  background-image: linear-gradient(to bottom, #fff6c2 0%, var(--color-gold) 45%, var(--color-gold-deep) 75%, #c98700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 0.5cqh rgba(80, 45, 5, 0.85);
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0.4cqh 0 rgba(120, 70, 10, 0.6));
+}
+
+/* Brillo glossy reutilizable (capa superior fija) */
+.gloss::after {
+  content: '';
+  position: absolute;
+  inset: 0.4cqh 0.6cqh auto 0.6cqh;
+  height: 38%;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+/* Lluvia de la pantalla de derrota (transform, GPU) */
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-20vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(120vh);
+    opacity: 0.7;
+  }
+}
+
+/* Vaivén lateral de la balsa de animales → blancos móviles (reto) */
+@keyframes raft-sway {
+  0%,
+  100% {
+    transform: translateX(-2.2cqw);
+  }
+  50% {
+    transform: translateX(2.2cqw);
+  }
+}
+.anim-raft {
+  animation: raft-sway 4s ease-in-out infinite;
+}
+
+/* Nado: el animal deriva en una elipse (blanco móvil). Amplitud/velocidad
+   se controlan por --ax/--ay/--swim-dur → escalan con el nivel. */
+@keyframes swim {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(var(--ax, 8px), calc(-1 * var(--ay, 6px)));
+  }
+  50% {
+    transform: translate(0, calc(-1 * var(--ay, 6px)));
+  }
+  75% {
+    transform: translate(calc(-1 * var(--ax, 8px)), 0);
+  }
+}
+.anim-swim {
+  animation: swim var(--swim-dur, 3.5s) ease-in-out infinite;
+}
+
+/* Respeta usuarios con movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
