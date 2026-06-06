@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useGame } from '../context/GameContext'
+import { useIsTouch } from '../hooks/useDevice'
+import { goFullscreenLandscape } from '../fullscreen'
 import PartyBackground from './PartyBackground'
 import WoodButton from './WoodButton'
 import InstructionsModal from './InstructionsModal'
@@ -14,10 +16,15 @@ const TITLE = 'ARCA PARTY'
 
 export default function MainMenu() {
   const { nickname, goTo } = useGame()
+  const isTouch = useIsTouch()
   const [showHelp, setShowHelp] = useState(false)
 
   // Si ya hay perfil → directo al selector; si no, a crear el tripulante.
-  const enter = () => goTo(nickname ? 'SELECT' : 'PROFILE')
+  // En móvil aprovecha el gesto para pantalla completa + horizontal.
+  const enter = () => {
+    if (isTouch) goFullscreenLandscape()
+    goTo(nickname ? 'SELECT' : 'PROFILE')
+  }
 
   return (
     <PartyBackground>

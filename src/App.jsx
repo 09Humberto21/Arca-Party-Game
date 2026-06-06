@@ -4,6 +4,8 @@ import Stage from './components/Stage'
 import ErrorBoundary from './components/ErrorBoundary'
 import SoundToggle from './components/SoundToggle'
 import GuideChat from './components/GuideChat'
+import TouchControls from './components/TouchControls'
+import { useIsTouch } from './hooks/useDevice'
 import MainMenu from './components/MainMenu'
 import ProfileScreen from './components/ProfileScreen'
 import SelectScreen from './components/SelectScreen'
@@ -27,6 +29,7 @@ import PartyBackground from './components/PartyBackground'
  */
 function Screens() {
   const game = useGame()
+  const isTouch = useIsTouch()
 
   return (
     <Stage>
@@ -98,6 +101,8 @@ function Screens() {
               <GameHUD />
               {/* Minijuego activo */}
               <GameLoop />
+              {/* Controles táctiles (solo en móvil/táctil) */}
+              {isTouch && <TouchControls />}
               {/* Pausa por encima de todo */}
               <AnimatePresence>{game.paused && <PauseOverlay />}</AnimatePresence>
             </PartyBackground>
