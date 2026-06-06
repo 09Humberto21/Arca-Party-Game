@@ -1,17 +1,13 @@
 /**
- * fullscreen.js — Pantalla completa + bloqueo de orientación (móvil).
+ * fullscreen.js — Pantalla completa inmersiva (móvil). Sin bloqueo de
+ * orientación: el juego se disfruta en VERTICAL en el celular.
  * Debe llamarse desde un gesto del usuario (p. ej. el botón PLAY).
- * Todo va en try/catch: iOS Safari no soporta Fullscreen API ni orientation.lock.
+ * En try/catch: iOS Safari no soporta la Fullscreen API.
  */
-export async function goFullscreenLandscape() {
+export async function goFullscreen() {
   try {
     const el = document.documentElement
     if (el.requestFullscreen && !document.fullscreenElement) await el.requestFullscreen()
-  } catch {
-    /* no soportado: se ignora */
-  }
-  try {
-    if (screen.orientation?.lock) await screen.orientation.lock('landscape')
   } catch {
     /* no soportado: se ignora */
   }

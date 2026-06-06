@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useGame } from '../context/GameContext'
 import { playSound } from '../sound'
@@ -100,6 +100,9 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
   const [round, setRound] = useState(0)
   const [remaining, setRemaining] = useState(0)
   const [view, setView] = useState(null)
+  // Tablero (muros/cajas) en su propio estado: solo cambia al destruir una caja,
+  // NO en cada tick → las 117 casillas no se re-renderizan siempre (evita el lag).
+  const [grid, setGrid] = useState(null)
 
   const sim = useRef(null)
   const statusRef = useRef(status)
@@ -122,9 +125,11 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
       nextId: 1000,
       lastMove: 0,
       lastEnemyMove: 0,
+      gridDirty: false,
       ended: false,
     }
     setRemaining(enemies.length)
+    setGrid(grid.map((r) => [...r]))
     snapshot()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round])
@@ -133,7 +138,6 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
     const s = sim.current
     if (!s) return
     setView({
-      grid: s.grid.map((r) => [...r]),
       player: { ...s.player },
       enemies: s.enemies.map((e) => ({ ...e })),
       bombs: s.bombs.map((b) => ({ ...b })),
@@ -174,6 +178,7 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
         cells.push({ x, y })
         if (cell === 2) {
           s.grid[y][x] = 0
+          s.gridDirty = true
           cbs.current.onCorrect?.()
           crateCells.push({ x, y })
           break
@@ -270,6 +275,11 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
         cbs.current.onWin?.()
       }
 
+      // El tablero solo se actualiza cuando cambió (caja destruida)
+      if (s.gridDirty) {
+        setGrid(s.grid.map((r) => [...r]))
+        s.gridDirty = false
+      }
       snapshot()
     }, 70)
     return () => clearInterval(id)
@@ -398,10 +408,9 @@ export default function BombaArca({ onWin, onLose, onCorrect }) {
       <div className="absolute inset-x-0 top-[22.5cqh] z-10 flex justify-center">
         <div className="wood-3d relative rounded-[1.6cqh] p-[0.8cqh]" style={{ width: `${boardW + 1.6}cqh`, height: `${boardH + 1.6}cqh` }}>
           <div className="relative overflow-hidden rounded-[1cqh]" style={{ width: `${boardW}cqh`, height: `${boardH}cqh`, background: '#3a7d44' }}>
+            <BoardTiles grid={grid} />
             {view && (
               <>
-                {view.grid.map((row, y) => row.map((cell, x) => <Tile key={`${x}-${y}`} x={x} y={y} cell={cell} />))}
-
                 {/* Power-ups */}
                 {view.items.map((it) => (
                   <Entity key={`i-${it.id}`} x={it.x} y={it.y} z={5}>
@@ -493,6 +502,12 @@ function Chip({ children }) {
     </span>
   )
 }
+
+/** Casillas estáticas memoizadas: solo se re-renderizan cuando cambia el grid. */
+const BoardTiles = memo(function BoardTiles({ grid }) {
+  if (!grid) return null
+  return grid.map((row, y) => row.map((cell, x) => <Tile key={`${x}-${y}`} x={x} y={y} cell={cell} />))
+})
 
 function Tile({ x, y, cell }) {
   const base = { position: 'absolute', width: `${CELL}cqh`, height: `${CELL}cqh`, transform: `translate(${x * CELL}cqh, ${y * CELL}cqh)` }

@@ -32,6 +32,7 @@ function Screens() {
   const isTouch = useIsTouch()
 
   return (
+    <>
     <Stage>
       <ErrorBoundary>
       <AnimatePresence>
@@ -101,8 +102,6 @@ function Screens() {
               <GameHUD />
               {/* Minijuego activo */}
               <GameLoop />
-              {/* Controles táctiles (solo en móvil/táctil) */}
-              {isTouch && <TouchControls />}
               {/* Pausa por encima de todo */}
               <AnimatePresence>{game.paused && <PauseOverlay />}</AnimatePresence>
             </PartyBackground>
@@ -140,7 +139,10 @@ function Screens() {
       <SoundToggle />
       {/* Chat-guía (oculto durante la partida para no estorbar) */}
       {game.screen !== SCREENS.PLAYING && <GuideChat />}
-    </Stage>
+      </Stage>
+      {/* Controles táctiles a nivel de viewport (solo móvil; se autogestiona) */}
+      {isTouch && <TouchControls />}
+    </>
   )
 }
 

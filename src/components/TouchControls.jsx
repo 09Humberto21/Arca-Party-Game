@@ -1,28 +1,22 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { useGame } from '../context/GameContext'
+import { useGame, SCREENS } from '../context/GameContext'
 import { playSound } from '../sound'
 
 /**
  * TouchControls — Controles táctiles para móvil. NO toca la lógica de los
  * minijuegos: sintetiza eventos de teclado sobre `window`, que Snake, Bombas
- * y Salta la Ola ya escuchan. Acomoda y Sopa se juegan por arrastre (no
- * necesitan controles).
+ * y Salta la Ola ya escuchan. Acomoda y Sopa se juegan por arrastre.
  *
- * D-pad abajo-izquierda, botones de acción abajo-derecha. El contenedor deja
- * pasar los toques (pointer-events-none) salvo los propios botones.
+ * Se dibuja a nivel de VIEWPORT (fuera del contenedor 16:9), con unidades
+ * `vmin` → botones grandes y usables también en VERTICAL. El contenedor deja
+ * pasar los toques (pointer-events-none); solo los botones los capturan, así
+ * el centro (botones de overlays) sigue siendo pulsable.
  */
 
-const CODE = {
-  ArrowUp: 'ArrowUp', ArrowDown: 'ArrowDown', ArrowLeft: 'ArrowLeft', ArrowRight: 'ArrowRight',
-  ' ': 'Space', x: 'KeyX',
-}
+const CODE = { ArrowUp: 'ArrowUp', ArrowDown: 'ArrowDown', ArrowLeft: 'ArrowLeft', ArrowRight: 'ArrowRight', ' ': 'Space', x: 'KeyX' }
+const fireKey = (key) => window.dispatchEvent(new KeyboardEvent('keydown', { key, code: CODE[key] || '', bubbles: true }))
 
-function fireKey(key) {
-  window.dispatchEvent(new KeyboardEvent('keydown', { key, code: CODE[key] || '', bubbles: true }))
-}
-
-/** Botón que, al mantenerse pulsado, repite la tecla (para moverse). */
 function HoldButton({ keyName, repeatMs = 90, className, style, children, label }) {
   const timer = useRef(null)
   const stop = () => {
@@ -39,22 +33,13 @@ function HoldButton({ keyName, repeatMs = 90, className, style, children, label 
   }
   useEffect(() => stop, [])
   return (
-    <motion.button
-      aria-label={label}
-      onPointerDown={start}
-      onPointerUp={stop}
-      onPointerLeave={stop}
-      onPointerCancel={stop}
-      whileTap={{ scale: 0.88 }}
-      className={`pointer-events-auto gpu select-none ${className}`}
-      style={{ touchAction: 'none', ...style }}
-    >
+    <motion.button aria-label={label} onPointerDown={start} onPointerUp={stop} onPointerLeave={stop} onPointerCancel={stop}
+      whileTap={{ scale: 0.88 }} className={`pointer-events-auto gpu select-none ${className}`} style={{ touchAction: 'none', ...style }}>
       {children}
     </motion.button>
   )
 }
 
-/** Botón de acción de un solo disparo (saltar / bomba / detonar). */
 function TapButton({ keyName, className, style, children, label }) {
   const onDown = (e) => {
     e.preventDefault()
@@ -63,40 +48,34 @@ function TapButton({ keyName, className, style, children, label }) {
     playSound('click')
   }
   return (
-    <motion.button
-      aria-label={label}
-      onPointerDown={onDown}
-      whileTap={{ scale: 0.86 }}
-      className={`pointer-events-auto gpu select-none ${className}`}
-      style={{ touchAction: 'none', ...style }}
-    >
+    <motion.button aria-label={label} onPointerDown={onDown} whileTap={{ scale: 0.86 }}
+      className={`pointer-events-auto gpu select-none ${className}`} style={{ touchAction: 'none', ...style }}>
       {children}
     </motion.button>
   )
 }
 
-const dpadCell =
-  'wood-3d flex items-center justify-center rounded-[1.6cqh] !border-[0.4cqh] text-[4cqh] text-white h-[11cqh] w-[11cqh]'
-const actionBtn =
-  'wood-3d flex items-center justify-center rounded-full !border-[0.5cqh] font-display text-white text-stroke'
+const dpadCell = 'wood-3d flex items-center justify-center rounded-[2.5vmin] !border-[0.6vmin] text-[6vmin] text-white h-[14vmin] w-[14vmin]'
+const actionBtn = 'wood-3d flex items-center justify-center rounded-full !border-[0.8vmin] font-display text-white text-stroke'
 
 export default function TouchControls() {
-  const { currentMinigame } = useGame()
+  const { currentMinigame, screen, paused } = useGame()
+
+  // Solo durante la partida (no en overlays de pausa)
+  if (screen !== SCREENS.PLAYING || paused) return null
 
   const needsDpad = currentMinigame === 'snake' || currentMinigame === 'bomba'
   const needsJump = currentMinigame === 'ola'
   const needsBomb = currentMinigame === 'bomba'
-
   if (!needsDpad && !needsJump && !needsBomb) return null
 
+  const bottom = 'calc(env(safe-area-inset-bottom, 0px) + 3vmin)'
+
   return (
-    <div
-      className="pointer-events-none absolute inset-0 z-40"
-      style={{ paddingBottom: 'env(safe-area-inset-bottom)', paddingLeft: 'env(safe-area-inset-left)', paddingRight: 'env(safe-area-inset-right)' }}
-    >
+    <div className="pointer-events-none fixed inset-0 z-[45]">
       {/* D-pad abajo-izquierda */}
       {needsDpad && (
-        <div className="absolute bottom-[3cqh] left-[2.5cqw] grid grid-cols-3 grid-rows-3 gap-[0.6cqh] opacity-90">
+        <div className="absolute grid grid-cols-3 grid-rows-3 gap-[1.4vmin] opacity-95" style={{ bottom, left: 'calc(env(safe-area-inset-left, 0px) + 4vmin)' }}>
           <span />
           <HoldButton keyName="ArrowUp" label="Arriba" className={dpadCell}>⬆️</HoldButton>
           <span />
@@ -110,14 +89,14 @@ export default function TouchControls() {
       )}
 
       {/* Botones de acción abajo-derecha */}
-      <div className="absolute bottom-[3cqh] right-[2.5cqw] flex items-end gap-[1.5cqw]">
+      <div className="absolute flex items-end gap-[3vmin]" style={{ bottom, right: 'calc(env(safe-area-inset-right, 0px) + 4vmin)' }}>
         {needsBomb && (
-          <TapButton keyName="x" label="Detonar" className={`${actionBtn} h-[11cqh] w-[11cqh] text-[4cqh]`} style={{ background: 'linear-gradient(to bottom, #b06bff, #7b2ff7)', boxShadow: '0 6px 0 #5a1fb0' }}>
+          <TapButton keyName="x" label="Detonar" className={`${actionBtn} h-[14vmin] w-[14vmin] text-[7vmin]`} style={{ background: 'linear-gradient(to bottom, #b06bff, #7b2ff7)', boxShadow: '0 1.4vmin 0 #5a1fb0' }}>
             💥
           </TapButton>
         )}
         {(needsBomb || needsJump) && (
-          <TapButton keyName=" " label={needsJump ? 'Saltar' : 'Poner bomba'} className={`${actionBtn} h-[15cqh] w-[15cqh] text-[6cqh]`} style={{ background: 'linear-gradient(to bottom, var(--color-tangerine), #ff5e7e)', boxShadow: '0 7px 0 #b8344f' }}>
+          <TapButton keyName=" " label={needsJump ? 'Saltar' : 'Poner bomba'} className={`${actionBtn} h-[20vmin] w-[20vmin] text-[10vmin]`} style={{ background: 'linear-gradient(to bottom, var(--color-tangerine), #ff5e7e)', boxShadow: '0 1.6vmin 0 #b8344f' }}>
             {needsJump ? '⬆️' : '💣'}
           </TapButton>
         )}

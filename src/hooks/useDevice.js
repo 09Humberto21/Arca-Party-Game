@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 /**
  * Hooks de dispositivo para la versión móvil.
  *  - useIsTouch: true en pantallas táctiles (no rompe escritorio).
- *  - useIsPortrait: true cuando la ventana está en vertical.
  */
 
 function mq(query) {
@@ -26,19 +25,4 @@ export function useIsTouch() {
   }, [])
 
   return touch
-}
-
-export function useIsPortrait() {
-  const detect = () => (mq('(orientation: portrait)')?.matches ?? false)
-  const [portrait, setPortrait] = useState(detect)
-
-  useEffect(() => {
-    const m = mq('(orientation: portrait)')
-    if (!m) return
-    const on = () => setPortrait(detect())
-    m.addEventListener?.('change', on)
-    return () => m.removeEventListener?.('change', on)
-  }, [])
-
-  return portrait
 }

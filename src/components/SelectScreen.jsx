@@ -54,8 +54,11 @@ export default function SelectScreen() {
           Elige tu desafío 🎮
         </motion.h2>
 
-        {/* Tarjetas */}
-        <div className="flex items-stretch justify-center gap-[2.5cqw]">
+        {/* Tarjetas (deslizables horizontalmente — caben todas en cualquier pantalla) */}
+        <div
+          className="flex w-full snap-x snap-mandatory items-stretch gap-[2.5cqw] overflow-x-auto px-[4cqw] py-[1cqh]"
+          style={{ scrollbarWidth: 'none' }}
+        >
           {MINIGAMES.map((g, i) => {
             const unlocked = unlockedMinigames.includes(g.id)
             return (
@@ -123,7 +126,7 @@ function GameCard({ game, index, unlocked, onPlay, onShop }) {
       transition={{ delay: 0.25 + index * 0.12, type: 'spring', stiffness: 240, damping: 16 }}
       whileHover={disabled ? { x: [0, -4, 4, -4, 0] } : { scale: 1.06, y: -6 }}
       whileTap={disabled ? undefined : { scale: 0.95 }}
-      className="wood-3d relative flex w-[24cqw] flex-col items-center gap-[1cqh] rounded-[2.4cqh] px-[2cqw] py-[2.5cqh] text-center"
+      className="wood-3d relative flex w-[24cqw] shrink-0 snap-center flex-col items-center gap-[1cqh] rounded-[2.4cqh] px-[2cqw] py-[2.5cqh] text-center"
       style={{ cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.92 : 1 }}
     >
       <div

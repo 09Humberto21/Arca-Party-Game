@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useGame } from '../context/GameContext'
 import { useIsTouch } from '../hooks/useDevice'
-import { goFullscreenLandscape } from '../fullscreen'
+import { goFullscreen } from '../fullscreen'
 import PartyBackground from './PartyBackground'
 import WoodButton from './WoodButton'
 import InstructionsModal from './InstructionsModal'
@@ -22,7 +22,7 @@ export default function MainMenu() {
   // Si ya hay perfil → directo al selector; si no, a crear el tripulante.
   // En móvil aprovecha el gesto para pantalla completa + horizontal.
   const enter = () => {
-    if (isTouch) goFullscreenLandscape()
+    if (isTouch) goFullscreen()
     goTo(nickname ? 'SELECT' : 'PROFILE')
   }
 
