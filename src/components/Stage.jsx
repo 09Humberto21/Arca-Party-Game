@@ -1,13 +1,30 @@
 /**
- * Stage — Escenario de juego en formato 16:9, responsivo.
+ * Stage — Escenario del juego.
  *
- * Mantiene SIEMPRE la proporción 16:9 internamente (así el cálculo en
- * `cqh`/`cqw` de los minijuegos no se rompe), escalado al máximo que quepa,
- * centrado. Usa `dvh`/`dvw` para no saltar con la barra del navegador móvil.
- * Se juega tanto en horizontal como en VERTICAL (en vertical el área queda
- * centrada y los controles táctiles se dibujan abajo, a nivel de viewport).
+ * Dos modos:
+ *  - 16:9 (por defecto): para los MINIJUEGOS, cuyos tableros se calculan en
+ *    `cqh`/`cqw` asumiendo proporción apaisada. Se centra y se letterboxea.
+ *  - `fill`: para las PANTALLAS DE UI (menús, lobby, resultados, podio). Llena
+ *    TODA la pantalla y aplica `containerType: size` sobre el viewport completo,
+ *    así `cqh`/`cqw` se miden contra la pantalla real → se ve grande también en
+ *    un celular en vertical (no queda como una franja pequeña 16:9).
+ *
+ * Usa `dvh`/`dvw` para no saltar con la barra del navegador móvil.
  */
-export default function Stage({ children }) {
+export default function Stage({ children, fill = false }) {
+  if (fill) {
+    return (
+      <div className="fixed inset-0 overflow-hidden bg-gradient-to-br from-sky-top via-grape to-ocean-deep">
+        <div
+          className="relative overflow-hidden"
+          style={{ containerType: 'size', width: '100dvw', height: '100dvh' }}
+        >
+          {children}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center overflow-hidden bg-gradient-to-br from-sky-top via-grape to-ocean-deep">
       <div

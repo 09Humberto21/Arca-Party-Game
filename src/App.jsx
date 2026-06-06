@@ -34,9 +34,13 @@ function Screens() {
   const game = useGame()
   const isTouch = useIsTouch()
 
+  // En móvil, las pantallas de UI (todo menos el minijuego) llenan la pantalla
+  // completa; los minijuegos mantienen 16:9 (sus tableros son apaisados).
+  const fillStage = isTouch && game.screen !== SCREENS.PLAYING
+
   return (
     <>
-    <Stage>
+    <Stage fill={fillStage}>
       <ErrorBoundary>
       <AnimatePresence>
         {game.screen === SCREENS.MENU && (
