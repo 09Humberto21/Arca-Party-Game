@@ -7,6 +7,8 @@ import SaltaLaOla from '../SaltaLaOla'
 import DesafioSombra from '../DesafioSombra'
 import SerpienteArca from '../SerpienteArca'
 import BombaArca from '../BombaArca'
+import MemoriaArca from '../MemoriaArca'
+import AtrapaFruta from '../AtrapaFruta'
 import LiveScoreboard from './LiveScoreboard'
 
 /**
@@ -21,7 +23,15 @@ import LiveScoreboard from './LiveScoreboard'
  *   ¡completado! → +500 + bonus por tiempo restante (termina la ronda)
  *   derrota      → termina la ronda (conserva lo acumulado)
  */
-const MINIGAMES = { acomoda: AcomodaBarca, ola: SaltaLaOla, sombra: DesafioSombra, snake: SerpienteArca, bomba: BombaArca }
+const MINIGAMES = {
+  acomoda: AcomodaBarca,
+  ola: SaltaLaOla,
+  sombra: DesafioSombra,
+  snake: SerpienteArca,
+  bomba: BombaArca,
+  memoria: MemoriaArca,
+  atrapa: AtrapaFruta,
+}
 const ROUND_MS = 30000
 
 export default function OnlineGameLoop() {

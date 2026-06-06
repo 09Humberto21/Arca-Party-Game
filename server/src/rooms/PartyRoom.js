@@ -11,7 +11,7 @@ import { PartyState, Player } from './schema/PartyState.js'
  */
 
 // Pool de minijuegos disponibles (ids iguales a los del cliente / GameLoop).
-const MINIGAME_POOL = ['acomoda', 'ola', 'sombra', 'snake', 'bomba']
+const MINIGAME_POOL = ['acomoda', 'ola', 'sombra', 'snake', 'bomba', 'memoria', 'atrapa']
 
 const COUNTDOWN_MS = 3500 // 3·2·1·¡YA!
 const ROUND_MS = 30000 // duración de cada ronda

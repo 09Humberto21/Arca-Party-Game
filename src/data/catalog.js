@@ -75,6 +75,26 @@ export const MINIGAMES = [
     currency: 'coin',
     available: true,
   },
+  {
+    id: 'memoria',
+    emoji: '🧠',
+    title: 'Memoria del Arca',
+    desc: 'Voltea las cartas y encuentra todas las parejas de animales a tiempo.',
+    tint: 'var(--color-grape)',
+    cost: 3,
+    currency: 'diamond',
+    available: true,
+  },
+  {
+    id: 'atrapa',
+    emoji: '🧺',
+    title: 'Atrapa la Fruta',
+    desc: '¡Toca las frutas para cosecharlas y esquiva las bombas!',
+    tint: 'var(--color-tangerine)',
+    cost: 350,
+    currency: 'coin',
+    available: true,
+  },
 ]
 
 // Desbloqueados de inicio

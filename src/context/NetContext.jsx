@@ -150,4 +150,6 @@ export const MINIGAME_META = {
   sombra: { name: 'Sopa de la Sombra', emoji: '🔤', hint: 'Encuentra el nombre del animal' },
   snake: { name: 'Serpiente del Arca', emoji: '🐍', hint: 'Come y crece con el D-pad' },
   bomba: { name: 'Bomba Arca', emoji: '💣', hint: 'Pon bombas y elimina enemigos' },
+  memoria: { name: 'Memoria del Arca', emoji: '🧠', hint: 'Encuentra las parejas de animales' },
+  atrapa: { name: 'Atrapa la Fruta', emoji: '🧺', hint: 'Toca frutas, evita la bomba 💣' },
 }

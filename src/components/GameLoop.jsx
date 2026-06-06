@@ -6,6 +6,8 @@ import SaltaLaOla from './SaltaLaOla'
 import DesafioSombra from './DesafioSombra'
 import SerpienteArca from './SerpienteArca'
 import BombaArca from './BombaArca'
+import MemoriaArca from './MemoriaArca'
+import AtrapaFruta from './AtrapaFruta'
 
 /**
  * GameLoop — Orquestador de minijuegos (MASTER_PLAN).
@@ -18,6 +20,8 @@ const MINIGAMES = {
   sombra: DesafioSombra,
   snake: SerpienteArca,
   bomba: BombaArca,
+  memoria: MemoriaArca,
+  atrapa: AtrapaFruta,
 }
 
 export default function GameLoop() {
