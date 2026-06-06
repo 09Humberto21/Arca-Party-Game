@@ -3,7 +3,12 @@ import { WebSocketTransport } from '@colyseus/ws-transport'
 import { createServer } from 'http'
 import express from 'express'
 import cors from 'cors'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { PartyRoom } from './rooms/PartyRoom.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 /**
  * Servidor Arca Party Online (Colyseus 0.15).
@@ -20,8 +25,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Salud (Render / monitoreo) y bienvenida.
-app.get('/', (_req, res) => res.json({ name: 'arca-party-server', status: 'ok' }))
+// Salud (Render / monitoreo).
 app.get('/health', (_req, res) => res.json({ ok: true }))
 
 // Resolver: código de sala → roomId. El cliente luego hace joinById(roomId).
@@ -39,6 +43,17 @@ app.get('/rooms/:code', async (req, res) => {
     res.status(500).json({ error: 'server_error' })
   }
 })
+
+// En producción, este mismo servicio sirve el JUEGO compilado (dist/) → un solo
+// deploy gratis sirve la web y el multijugador en el mismo origen. En desarrollo
+// no existe dist/ (el juego lo sirve Vite aparte) → responde un saludo simple.
+const clientDist = path.join(__dirname, '..', '..', 'dist')
+if (fs.existsSync(clientDist)) {
+  app.use(express.static(clientDist))
+  app.get('*', (_req, res) => res.sendFile(path.join(clientDist, 'index.html')))
+} else {
+  app.get('/', (_req, res) => res.json({ name: 'arca-party-server', status: 'ok' }))
+}
 
 const httpServer = createServer(app)
 const gameServer = new Server({

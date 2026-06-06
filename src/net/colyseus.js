@@ -13,8 +13,18 @@ import { Client } from 'colyseus.js'
 function resolveBases() {
   let ws = (import.meta.env.VITE_SERVER_URL || '').trim()
   if (!ws) {
-    const proto = window.location.protocol === 'https:' ? 'wss' : 'ws'
-    ws = `${proto}://${window.location.hostname}:2567`
+    const { protocol, hostname, host } = window.location
+    const wsproto = protocol === 'https:' ? 'wss' : 'ws'
+    // ¿Desarrollo? (localhost o IP de red local) → el servidor corre aparte en :2567.
+    const isDev =
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      /^192\.168\./.test(hostname) ||
+      /^10\./.test(hostname) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(hostname)
+    // En producción, el mismo servicio sirve el juego y el multijugador → mismo
+    // origen (sin puerto extra). En desarrollo, el puerto 2567.
+    ws = isDev ? `${wsproto}://${hostname}:2567` : `${wsproto}://${host}`
   }
   ws = ws.replace(/^http/, 'ws') // acepta también http(s):// y lo normaliza
   const http = ws.replace(/^ws/, 'http')

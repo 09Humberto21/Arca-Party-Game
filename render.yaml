@@ -1,13 +1,21 @@
-# Deploy gratis del servidor Arca Party en Render.
-# https://render.com → New → Blueprint → conecta el repo → usa este archivo.
+# Deploy GRATIS de Arca Party en Render (un solo servicio sirve el juego + el
+# multijugador en el mismo origen → sin configurar URLs ni CORS).
+#
+# Cómo usarlo:
+#   1. Sube el repo a GitHub (git push).
+#   2. En https://render.com → New → Blueprint → conecta el repo.
+#   3. Render lee este archivo y despliega. Te da una URL pública
+#      (https://arca-party.onrender.com) que sirve TODO. ¡Comparte ese link!
+#
+# Nota: en Render (Linux) npm funciona normal (el problema de ComSpec es solo
+# en tu PC Windows).
 services:
   - type: web
-    name: arca-party-server
+    name: arca-party
     runtime: node
-    rootDir: server
     plan: free
-    buildCommand: npm install --ignore-scripts
-    startCommand: node src/index.js
+    buildCommand: npm install && npm run build && npm install --prefix server
+    startCommand: node server/src/index.js
     healthCheckPath: /health
     envVars:
       - key: NODE_VERSION
