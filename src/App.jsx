@@ -3,6 +3,7 @@ import { GameProvider, SCREENS, useGame } from './context/GameContext'
 import Stage from './components/Stage'
 import ErrorBoundary from './components/ErrorBoundary'
 import SoundToggle from './components/SoundToggle'
+import GuideChat from './components/GuideChat'
 import MainMenu from './components/MainMenu'
 import ProfileScreen from './components/ProfileScreen'
 import SelectScreen from './components/SelectScreen'
@@ -132,6 +133,8 @@ function Screens() {
       </ErrorBoundary>
       {/* Control de sonido visible en todas las pantallas */}
       <SoundToggle />
+      {/* Chat-guía (oculto durante la partida para no estorbar) */}
+      {game.screen !== SCREENS.PLAYING && <GuideChat />}
     </Stage>
   )
 }
